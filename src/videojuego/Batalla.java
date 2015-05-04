@@ -112,7 +112,8 @@ public class Batalla {
         if(Posicion){
             inicia();
             Posicion=false;
-            anchoEnemigo= Escenario.Singleton().batalla().vida;
+            System.out.println(Escenario.Singleton().batalla().Imagen);
+            anchoEnemigo= Escenario.Singleton().batalla().getVida();
         }
         menuBatalla(g);
         g.drawImage(combate, posicionP.getIntX(), posicionP.getIntY(), null);

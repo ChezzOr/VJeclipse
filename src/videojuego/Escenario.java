@@ -51,8 +51,8 @@ public class Escenario {
     public static int posicionEnemigo=0;
     public static Enemigos enemigos[]= new Enemigos[10];
     public static Item item;
-    public static Batalla batalla=VentanaJuego.Singleton().batallaActual();
-    public static int enBatalla;
+    public int enBatalla;
+    public boolean eliminar;
     
     public static Escenario Singleton(){
         if(instancia==null){
@@ -118,7 +118,10 @@ public class Escenario {
                 //item.dibujarItem();
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=0;i<4;i++){
-                	if(enemigos[i].isVivo()){
+                	if(i==enBatalla && eliminar){
+                		enemigos[i].setVida(0);
+                	}
+                	if(enemigos[i].getVida()>0){
                 		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
                 		colisionEnemigos(enemigos[i],i);
                 	}
@@ -169,12 +172,13 @@ public class Escenario {
     }
     
     public Enemigos batalla(){
+    	System.out.println(enemigos[enBatalla]);
     	return enemigos[enBatalla];
     }
     
     public void destruyeEnemigo(){
     	System.out.println(enBatalla);
-    	enemigos[3].setVivo(false);
+    	eliminar=true;
     }
     
     public void comandoTecla(KeyEvent e){

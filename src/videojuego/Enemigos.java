@@ -17,7 +17,7 @@ import java.util.*;
 public class Enemigos {
     public static Rectangle enemigo=null;
     public static boolean batalla=false;
-    public static int vida=0;
+    private static int vida=0;
     public static int ataque=0;
     public static int defensa=0;
     public static Rectangle Imagen=null;
@@ -33,7 +33,7 @@ public class Enemigos {
         this.ancho=ancho;
         this.alto=alto;
         Imagen=new Rectangle(x,y,ancho,alto);
-        vida=100;
+        setVida(100);
         ataque=10;
         defensa=5;
         vivo=true;
@@ -75,12 +75,20 @@ public class Enemigos {
         batalla=false;
     }
 
-	public static boolean isVivo() {
+	public boolean isVivo() {
 		return vivo;
 	}
 
-	public static void setVivo(boolean vivo) {
+	public void setVivo(boolean vivo) {
 		Enemigos.vivo = vivo;
+	}
+
+	public static int getVida() {
+		return vida;
+	}
+
+	public static void setVida(int vida) {
+		Enemigos.vida = vida;
 	}
     
     

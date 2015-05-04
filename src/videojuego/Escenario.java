@@ -20,11 +20,12 @@ import java.awt.event.KeyEvent;
 public class Escenario {
 
     
-    public enum Mapa{Mastrum}
+    public enum Mapa{Mastrum, Bosque}
     static Escenario instancia=null;
     public static int alto=VentanaJuego.Singleton().getHeight();
     public static int ancho=VentanaJuego.Singleton().getWidth();
     public static Image mapaMastrum=DiccionarioImagenes.Singleton().imagen("Mastrum.png");
+    public static Image mapaBosque=DiccionarioImagenes.Singleton().imagen("Bosque.png");
     public static Rectangle Map= new Rectangle(-alto,-ancho,ancho*2,alto*2);
     public static Personaje principal= new Personaje();
     public static Mapa actual= Mapa.Mastrum;
@@ -122,6 +123,19 @@ public class Escenario {
                 		colisionEnemigos(enemigos[i],i);
                 	}
                 }
+                Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
+                if(Personaje.Singleton().colisiona(irBosque)){
+                	limites.cambiaLimite();
+                	actual = Mapa.Bosque;
+                }
+                break;
+            case Bosque:
+            	g.setColor(Color.BLUE);
+                g.fillRect(-800,-600,2000,2000);
+                g.drawImage(mapaBosque, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
+                limites.dibujaLimites(g, camaraX, camaraY);
+                Personaje.Singleton().dibujarPersonaje(g);
+                Personaje.Singleton().movimiento(dirCol,false);
                 break;
         }
         

@@ -15,7 +15,7 @@ import java.util.Stack;
  * @author Christopher
  */
 public class Bounds {
-        public enum limitesMapas{Mastrum}
+        public enum limitesMapas{Mastrum, Bosque, Gremio}
         public limitesMapas actuales=limitesMapas.Mastrum;
         public Stack <Rectangle> limites=new Stack();
         public Rectangle limite=null;
@@ -26,6 +26,7 @@ public class Bounds {
                 case Mastrum:
                     if(cambioEstado){
                         limites.removeAllElements();
+                        cambioEstado = false;
                     }
                     g.setColor(Color.black);
                     
@@ -46,24 +47,37 @@ public class Bounds {
                     g.fillRect(CamX+1300, CamY, 501, 301);
                     
                     break;
+                case Bosque:
+                	if(cambioEstado){
+                        limites.removeAllElements();
+                        cambioEstado = false;
+                    }
+                    break;
                 default:
                     break;
             }
         }
         
         public void actualizaLimites(int CamX,int CamY){
-            limites.removeAllElements();
-            limite= new Rectangle(CamX, CamY, 1673, 51);
-            limites.push(limite);
+        	switch(actuales){
+        		case Mastrum:
+        			limites.removeAllElements();
+                    limite= new Rectangle(CamX, CamY, 1673, 51);
+                    limites.push(limite);
 
-            limite= new Rectangle(CamX, CamY+270, 365, 503);
-            limites.push(limite);
+                    limite= new Rectangle(CamX, CamY+270, 365, 503);
+                    limites.push(limite);
 
-            limite= new Rectangle(CamX+900, CamY+400, 100, 100);
-            limites.push(limite);
+                    limite= new Rectangle(CamX+900, CamY+400, 100, 100);
+                    limites.push(limite);
 
-            limite=new Rectangle(CamX+1300, CamY, 501, 301);
-            limites.push(limite);
+                    limite=new Rectangle(CamX+1300, CamY, 501, 301);
+                    limites.push(limite);
+                    break;
+        		case Bosque:
+        			limites.removeAllElements();
+                    break;
+        	}
         }
         
         
@@ -148,5 +162,18 @@ public class Bounds {
             }
             limites=aux;
             return colision;
+        }
+        
+        public void cambiaLimite(){
+        	if(actuales == limitesMapas.Mastrum){
+        		actuales = limitesMapas.Bosque;
+        		cambioEstado = true;
+        	} else if(actuales == limitesMapas.Bosque){
+        		actuales = limitesMapas.Gremio;
+        		cambioEstado = true;
+        	} else {
+        		actuales = limitesMapas.Mastrum;
+        		cambioEstado = true;
+        	}
         }
 }

@@ -51,8 +51,9 @@ public class Escenario {
     public static int posicionEnemigo=0;
     public static Enemigos enemigos[]= new Enemigos[10];
     public static Item item;
-    public int enBatalla;
+    public static int enBatalla;
     public boolean eliminar;
+    private static boolean inicio=true;
     
     public static Escenario Singleton(){
         if(instancia==null){
@@ -91,8 +92,6 @@ public class Escenario {
         return Colisionadores;
     }
     
-    private boolean inicio=true;
-    
     public void dibujaEscenario(Graphics g){
         
         if(inicio){
@@ -118,13 +117,11 @@ public class Escenario {
                 //item.dibujarItem();
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=0;i<4;i++){
-                	if(i==enBatalla && eliminar){
-                		enemigos[i].setVida(0);
-                	}
-                	if(enemigos[i].getVida()>0){
-                		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
-                		colisionEnemigos(enemigos[i],i);
-                	}
+                	/*if(i==enBatalla && eliminar){
+                		enemigos[i].setVivo(false);
+                	}*/
+            		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
+            		colisionEnemigos(enemigos[i],i);
                 }
                 Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
                 if(Personaje.Singleton().colisiona(irBosque)){
@@ -176,9 +173,11 @@ public class Escenario {
     	return enemigos[enBatalla];
     }
     
-    public void destruyeEnemigo(){
+    public void destruyeEnemigo(int destruye){
     	System.out.println(enBatalla);
-    	eliminar=true;
+    	System.out.println(destruye);
+    	//eliminar=true;
+    	enemigos[destruye].setVivo(false);
     }
     
     public void comandoTecla(KeyEvent e){

@@ -79,7 +79,7 @@ public class Batalla {
                 g.fillRect(0, 0,VentanaJuego.Singleton().getWidth() , VentanaJuego.Singleton().getHeight());
                 if(Siguiente){
                     estado=MenuBatalla.Reposo;
-                    Escenario.Singleton().destruyeEnemigo();
+                    Escenario.Singleton().destruyeEnemigo(Escenario.Singleton().enBatalla);
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                 }
                 break;

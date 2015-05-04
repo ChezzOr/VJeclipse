@@ -22,7 +22,7 @@ public class Enemigos {
     public static int defensa=0;
     public static Rectangle Imagen=null;
     public int x,y,ancho,alto;
-    private static boolean vivo;
+    private boolean vivo;
     public static boolean colision=false;
     public static String enCombate;
     public static Batalla batallaP= VentanaJuego.Singleton().batallaActual();
@@ -55,10 +55,6 @@ public class Enemigos {
         //g.fillRect(R.Imagen.x,R.Imagen.y,R.Imagen.width,R.Imagen.height);
     }
     
-    public void eliminaEnemigo(){
-        
-    }
-    
     public boolean colision(){
         if(Imagen.intersects(Personaje.Singleton().fronteras())){
             return true;
@@ -80,7 +76,7 @@ public class Enemigos {
 	}
 
 	public void setVivo(boolean vivo) {
-		Enemigos.vivo = vivo;
+		this.vivo = vivo;
 	}
 
 	public static int getVida() {

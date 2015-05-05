@@ -185,7 +185,7 @@ public class Escenario {
     }
     
     public Enemigos batalla(){
-    	System.out.println(enemigos[enBatalla]);
+    	//System.out.println(enemigos[enBatalla]);
     	return enemigos[enBatalla];
     }
     

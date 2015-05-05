@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 
+import videojuego.Item.atributo;
+
 
 /**
  *
@@ -102,7 +104,7 @@ public class Escenario {
                 a+=100;
                 b+=250;
             }
-            item = new Item(500, 200);
+            item = new Item(500, 200, atributo.vida);
             inicio=false;
         }
         activo=false;

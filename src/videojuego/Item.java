@@ -16,19 +16,21 @@ import java.awt.Rectangle;
  * @author Danny
  */
 public class Item {
-    Image imagen = null;
-    private String url;
+	public enum atributo{vida, poder, especial}
+	atributo tipo = null;
+	Image imagenVida = DiccionarioImagenes.Singleton().imagen("hola.jpg");
+	Image imagenPoder = DiccionarioImagenes.Singleton().imagen("hola.jpg");
+	Image imagenEspecial = DiccionarioImagenes.Singleton().imagen("hola.jpg");
     Vec pos = null;
     public static Rectangle Imagen=null;
     int ancho = VentanaJuego.Singleton().getWidth();
     int alto = VentanaJuego.Singleton().getHeight();
     boolean recogido;
     
-    public Item(int x, int y/*, String url*/) {
+    public Item(int x, int y, atributo tipoAtributo) {
         pos = new Vec(x, y);
-        //this.url = url;
+        tipo = tipoAtributo;
         recogido = false;
-        //imagen = DiccionarioImagenes.Singleton().imagen(url);
     }
     
     public void modificaItem( int CamX, int CamY){
@@ -39,13 +41,23 @@ public class Item {
     public void dibujarItem(Graphics g, int CamX, int CamY){
         int x = pos.getIntX();
         int y = pos.getIntY();
-    	g.setColor(Color.ORANGE);
+        switch(tipo){
+	        case vida:
+	        	g.setColor(Color.ORANGE);
+	    		break;
+	    	case poder:
+	    		g.setColor(Color.BLUE);
+	        	break;
+        	case especial:
+        		g.setColor(Color.YELLOW);
+            	break;
+        }
     	modificaItem(CamX, CamY);
         g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
     	//g.drawImage(imagen, x, y, null);
     }
     
-    public Rectangle getBounds(){
+    /*public Rectangle getBounds(){
         return new Rectangle(pos.getIntX(), pos.getIntY(), imagen.getWidth(null), imagen.getHeight(null));
-    }
+    }*/
 }

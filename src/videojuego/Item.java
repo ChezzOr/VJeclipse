@@ -19,6 +19,7 @@ public class Item {
     Image imagen = null;
     private String url;
     Vec pos = null;
+    public static Rectangle Imagen=null;
     int ancho = VentanaJuego.Singleton().getWidth();
     int alto = VentanaJuego.Singleton().getHeight();
     boolean recogido;
@@ -30,11 +31,17 @@ public class Item {
         //imagen = DiccionarioImagenes.Singleton().imagen(url);
     }
     
-    public void dibujarItem(Graphics g){
+    public void modificaItem( int CamX, int CamY){
+        Imagen= new Rectangle(pos.getIntX()+CamX, pos.getIntY()+CamY, 100, 100);
+    }
+    
+    
+    public void dibujarItem(Graphics g, int CamX, int CamY){
         int x = pos.getIntX();
         int y = pos.getIntY();
-    	g.setColor(Color.GREEN);
-        g.fillRect(x, y, 100, 100);
+    	g.setColor(Color.ORANGE);
+    	modificaItem(CamX, CamY);
+        g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
     	//g.drawImage(imagen, x, y, null);
     }
     

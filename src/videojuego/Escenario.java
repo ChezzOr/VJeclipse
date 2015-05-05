@@ -102,7 +102,7 @@ public class Escenario {
                 a+=100;
                 b+=250;
             }
-            item = new Item(a+200, b);
+            item = new Item(500, 200);
             inicio=false;
         }
         activo=false;
@@ -114,7 +114,7 @@ public class Escenario {
                 g.drawImage(mapaMastrum, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 Personaje.Singleton().dibujarPersonaje(g);
                 limites.dibujaLimites(g,camaraX,camaraY);
-                item.dibujarItem(g);
+                item.dibujarItem(g, camaraX, camaraY);
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=0;i<4;i++){
                 	/*if(i==enBatalla && eliminar){

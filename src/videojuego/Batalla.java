@@ -35,10 +35,13 @@ public class Batalla {
     int anchoEnemigo = 100;
     int xProta = 150;
     Variables var=new Variables();
-    
+    boolean ataque=false;
+    long inicio;
+    long limite=10000;
     
     public void inicia(){
         setPosicion(VentanaJuego.Singleton().getWidth()/2, VentanaJuego.Singleton().getHeight()/2);
+        inicio=System.currentTimeMillis();
     }
     
     void setPosicion(int x, int y){
@@ -51,25 +54,23 @@ public class Batalla {
     }
     
     public void menuBatalla(Graphics g){
-    	g.setColor(Color.black);
-        g.fillRect(0, 0, VentanaJuego.Singleton().getWidth(), VentanaJuego.Singleton().getHeight());
         g.setColor(Color.yellow);
-        g.fillRoundRect(20, 400, 700, 180, 20, 20);
+        g.fillRoundRect(20, 480, 750, 120, 20, 20);
         g.setColor(Color.GRAY);
         g.setFont(fuente_1);
-        g.drawString("Objeto", 300, VentanaJuego.Singleton().getHeight()-60);
-        g.drawString("Atacar",150,  VentanaJuego.Singleton().getHeight()-60);
-        g.drawString("Huir",450,  VentanaJuego.Singleton().getHeight()-60);
+        g.drawString("Objeto", 300, VentanaJuego.Singleton().getHeight()-80);
+        g.drawString("Atacar",150,  VentanaJuego.Singleton().getHeight()-80);
+        g.drawString("Huir",450,  VentanaJuego.Singleton().getHeight()-80);
         g.setColor(Color.cyan);
         switch(estado){
             case Atacar:
-                g.drawString("Atacar",150,  VentanaJuego.Singleton().getHeight()-60);
+                g.drawString("Atacar",150,  VentanaJuego.Singleton().getHeight()-80);
                 break;
             case Item: 
-                g.drawString("Objeto", 300, VentanaJuego.Singleton().getHeight()-60);
+                g.drawString("Objeto", 300, VentanaJuego.Singleton().getHeight()-80);
                 break;
             case Huir:
-                g.drawString("Huir",450,  VentanaJuego.Singleton().getHeight()-60);
+                g.drawString("Huir",450,  VentanaJuego.Singleton().getHeight()-80);
                 break;
             case Reposo:
 
@@ -115,7 +116,12 @@ public class Batalla {
             System.out.println(Escenario.Singleton().batalla().Imagen);
             anchoEnemigo= Escenario.Singleton().batalla().getVida();
         }
-        menuBatalla(g);
+        g.setColor(Color.black);
+        g.fillRect(0, 0, VentanaJuego.Singleton().getWidth(), VentanaJuego.Singleton().getHeight());
+        System.out.println(inicio+"-"+System.currentTimeMillis());
+        if(System.currentTimeMillis()-inicio>limite){
+        	menuBatalla(g);
+        }
         g.drawImage(combate, posicionP.getIntX(), posicionP.getIntY(), null);
         g.fillRect(posicionE.getIntX(), posicionE.getIntY(), 100, 100);
         g.setColor(Color.red);

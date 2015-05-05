@@ -22,19 +22,20 @@ public class Item {
     int ancho = VentanaJuego.Singleton().getWidth();
     int alto = VentanaJuego.Singleton().getHeight();
     boolean recogido;
-
-    public Item(int x, int y, String url) {
+    
+    public Item(int x, int y/*, String url*/) {
         pos = new Vec(x, y);
-        this.url = url;
+        //this.url = url;
         recogido = false;
-        imagen = DiccionarioImagenes.Singleton().imagen(url);
+        //imagen = DiccionarioImagenes.Singleton().imagen(url);
     }
     
-    public void dibujarItem(){
-        //int x = pos.getIntX();
-        //int y = pos.getIntY();
-        System.out.println("ksdanfads");
-        //g.drawImage(imagen, x, y, null);
+    public void dibujarItem(Graphics g){
+        int x = pos.getIntX();
+        int y = pos.getIntY();
+    	g.setColor(Color.GREEN);
+        g.fillRect(x, y, 100, 100);
+    	//g.drawImage(imagen, x, y, null);
     }
     
     public Rectangle getBounds(){

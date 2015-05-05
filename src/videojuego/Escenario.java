@@ -20,12 +20,13 @@ import java.awt.event.KeyEvent;
 public class Escenario {
 
     
-    public enum Mapa{Mastrum, Bosque}
+    public enum Mapa{Mastrum, Bosque, Gremio}
     static Escenario instancia=null;
     public static int alto=VentanaJuego.Singleton().getHeight();
     public static int ancho=VentanaJuego.Singleton().getWidth();
     public static Image mapaMastrum=DiccionarioImagenes.Singleton().imagen("Mastrum.png");
     public static Image mapaBosque=DiccionarioImagenes.Singleton().imagen("Bosque.png");
+    public static Image mapaGremio=DiccionarioImagenes.Singleton().imagen("Gremio.png");
     public static Rectangle Map= new Rectangle(-alto,-ancho,ancho*2,alto*2);
     public static Personaje principal= new Personaje();
     public static Mapa actual= Mapa.Mastrum;
@@ -68,8 +69,6 @@ public class Escenario {
         VentanaJuego.Singleton().getHeight()/2);
         Personaje.Singleton().setEstado(Personaje.Estados.avanzarAbajo);
         actual=Mapa.Mastrum;
-        item = new Item(VentanaJuego.Singleton().getWidth()/2+100, VentanaJuego.Singleton().getHeight()/2+100, "");
-        
         if(actual == Mapa.Mastrum){
             Musica.Singleton().correrMusica("Mastrum.wav");
         }
@@ -102,7 +101,8 @@ public class Escenario {
                 enemigos[i].creaEnemigo(a, b, 100, 100);
                 a+=100;
                 b+=250;
-            } 
+            }
+            item = new Item(a+200, b);
             inicio=false;
         }
         activo=false;
@@ -114,7 +114,7 @@ public class Escenario {
                 g.drawImage(mapaMastrum, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 Personaje.Singleton().dibujarPersonaje(g);
                 limites.dibujaLimites(g,camaraX,camaraY);
-                //item.dibujarItem();
+                item.dibujarItem(g);
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=0;i<4;i++){
                 	/*if(i==enBatalla && eliminar){
@@ -134,6 +134,20 @@ public class Escenario {
                 g.fillRect(-800,-600,2000,2000);
                 g.drawImage(mapaBosque, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 limites.dibujaLimites(g, camaraX, camaraY);
+                Personaje.Singleton().dibujarPersonaje(g);
+                Personaje.Singleton().movimiento(dirCol,false);
+                g.fillRect(0 + camaraX, 375 + camaraY, 10, 100);
+                Rectangle irGremio = new Rectangle(0 + camaraX, 375 + camaraY, 10, 100);
+                if(Personaje.Singleton().colisiona(irGremio)){
+                	limites.cambiaLimite();
+                	actual = Mapa.Gremio;
+                }
+                break;
+            case Gremio:
+            	g.setColor(Color.BLUE);
+                g.fillRect(-800,-600,2000,2000);
+                g.drawImage(mapaGremio, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
+                //limites.dibujaLimites(g, camaraX, camaraY);
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
                 break;

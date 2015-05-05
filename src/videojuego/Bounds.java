@@ -53,6 +53,12 @@ public class Bounds {
                         cambioEstado = false;
                     }
                     break;
+                case Gremio:
+                	if(cambioEstado){
+                        limites.removeAllElements();
+                        cambioEstado = false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -75,6 +81,9 @@ public class Bounds {
                     limites.push(limite);
                     break;
         		case Bosque:
+        			limites.removeAllElements();
+                    break;
+        		case Gremio:
         			limites.removeAllElements();
                     break;
         	}

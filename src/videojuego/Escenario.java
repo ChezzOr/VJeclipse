@@ -178,6 +178,7 @@ public class Escenario {
     	System.out.println(destruye);
     	//eliminar=true;
     	enemigos[destruye].setVivo(false);
+    	VentanaJuego.Singleton().nuevaBatalla();
     }
     
     public void comandoTecla(KeyEvent e){

@@ -17,7 +17,7 @@ import java.util.*;
 public class Enemigos {
     public static Rectangle enemigo=null;
     public static boolean batalla=false;
-    private static int vida=0;
+    private int vida=0;
     public static int ataque=0;
     public static int defensa=0;
     public static Rectangle Imagen=null;
@@ -79,12 +79,12 @@ public class Enemigos {
 		this.vivo = vivo;
 	}
 
-	public static int getVida() {
+	public int getVida() {
 		return vida;
 	}
 
-	public static void setVida(int vida) {
-		Enemigos.vida = vida;
+	public void setVida(int vida) {
+		this.vida = vida;
 	}
     
     

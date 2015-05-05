@@ -342,4 +342,8 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
         return nueva;
     }
     
+    public void nuevaBatalla(){
+    	batalla=new Batalla();
+    }
+    
 }

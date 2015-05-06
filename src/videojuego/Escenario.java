@@ -281,16 +281,16 @@ public class Escenario {
     public void colisionJefe(Jefe j){
     	switch(Personaje.Singleton().direccion){
 	        case avanzarIzquierda:
-	            Personaje.Singleton().mueve(2,0);
+	            Personaje.Singleton().mueve(3,0);
 	            break;
 	        case avanzarDerecha:
-	            Personaje.Singleton().mueve(-2,0);
+	            Personaje.Singleton().mueve(-3,0);
 	            break;
 	        case avanzarArriba:
-	            Personaje.Singleton().mueve(0,2);
+	            Personaje.Singleton().mueve(0,3);
 	            break;
 	        case avanzarAbajo:
-	            Personaje.Singleton().mueve(0,-2);
+	            Personaje.Singleton().mueve(0,-3);
 	            break;
 	        default:
 	            break;
@@ -314,16 +314,16 @@ public class Escenario {
     	if(colisionEnemigo){
             switch(Personaje.Singleton().direccion){
                 case avanzarIzquierda:
-                    Personaje.Singleton().mueve(2,0);
+                    Personaje.Singleton().mueve(3,0);
                     break;
                 case avanzarDerecha:
-                    Personaje.Singleton().mueve(-2,0);
+                    Personaje.Singleton().mueve(-3,0);
                     break;
                 case avanzarArriba:
-                    Personaje.Singleton().mueve(0,2);
+                    Personaje.Singleton().mueve(0,3);
                     break;
                 case avanzarAbajo:
-                    Personaje.Singleton().mueve(0,-2);
+                    Personaje.Singleton().mueve(0,-3);
                     break;
                 default:
                     break;

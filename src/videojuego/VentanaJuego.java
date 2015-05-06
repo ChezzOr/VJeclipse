@@ -370,4 +370,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     	return inventario;
     }
     
+    public static void setInventario(Inventario inv){
+    	inventario = inv;
+    }
 }

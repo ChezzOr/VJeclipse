@@ -47,7 +47,7 @@ public class Jefe {
 	    	}
 	    	modificaJefe(CamX,CamY);
 	        g.setColor(Color.red);
-	        g.fillRect(Imagen.x, Imagen.y, Imagen.width,Imagen.height);
+	        //g.fillRect(Imagen.x, Imagen.y, Imagen.width,Imagen.height);
 	        //g.fillRect(R.Imagen.x,R.Imagen.y,R.Imagen.width,R.Imagen.height);
 	    }
 	    

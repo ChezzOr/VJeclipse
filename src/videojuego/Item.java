@@ -56,7 +56,7 @@ public class Item {
 	            	break;
 	        }
 	    	modificaItem(CamX, CamY);
-	        g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
+	        //g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
 	    	//g.drawImage(imagen, x, y, null);
         }
     }

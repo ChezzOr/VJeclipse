@@ -77,6 +77,8 @@ public class Escenario {
     }
     
     public void inicia(){
+    	camaraX=-ancho/2;
+        camaraY=-alto/2;
         Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
         VentanaJuego.Singleton().getHeight()/2);
         Personaje.Singleton().setEstado(Personaje.Estados.avanzarAbajo);
@@ -566,5 +568,14 @@ public class Escenario {
 
 	public Batalla actualB(){
 		return batalla;
+	}
+	
+	public static void setInstancia(Escenario instancia) {
+		Escenario.instancia = instancia;
+		if(instancia == null){
+			Escenario.instancia = new Escenario();
+			Escenario.instancia.inicia();
+			inicio = true;
+		}
 	}
 }

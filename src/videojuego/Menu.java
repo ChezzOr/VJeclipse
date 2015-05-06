@@ -309,6 +309,9 @@ public class Menu {
                 
             case KeyEvent.VK_ENTER:
                 if(salir == Salir.Si){
+                	Escenario.Singleton().setInstancia(null);
+                	VentanaJuego.Singleton().setInventario(null);
+                	VentanaJuego.Singleton().setInventario(new Inventario());
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.MenuPrincipal);
                 }else if(salir == Salir.No){
                     next = false;

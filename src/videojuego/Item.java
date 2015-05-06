@@ -18,10 +18,11 @@ import java.awt.Rectangle;
 public class Item {
 	public enum atributo{vida, poder, especial}
 	atributo tipo = null;
-	Image imagenVida = DiccionarioImagenes.Singleton().imagen("hola.jpg");
-	Image imagenPoder = DiccionarioImagenes.Singleton().imagen("hola.jpg");
-	Image imagenEspecial = DiccionarioImagenes.Singleton().imagen("hola.jpg");
-    Vec pos = null;
+	Image imagenVida = DiccionarioImagenes.Singleton().imagen("pocion_salud.png");
+	Image imagenPoder = DiccionarioImagenes.Singleton().imagen("espada_dano.png");
+	Image imagenEspecial = DiccionarioImagenes.Singleton().imagen("eco_especial.png");
+
+	Vec pos = null;
     public static Rectangle Imagen=null;
     int ancho = VentanaJuego.Singleton().getWidth();
     int alto = VentanaJuego.Singleton().getHeight();
@@ -69,4 +70,37 @@ public class Item {
     public void borraItem(){
     	recogido = true;
     }
+
+	public Image getImagenVida() {
+		return imagenVida;
+	}
+
+	public void setImagenVida(Image imagenVida) {
+		this.imagenVida = imagenVida;
+	}
+
+	public Image getImagenPoder() {
+		return imagenPoder;
+	}
+
+	public void setImagenPoder(Image imagenPoder) {
+		this.imagenPoder = imagenPoder;
+	}
+
+	public Image getImagenEspecial() {
+		return imagenEspecial;
+	}
+
+	public void setImagenEspecial(Image imagenEspecial) {
+		this.imagenEspecial = imagenEspecial;
+	}
+    
+	public atributo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(atributo tipo) {
+		this.tipo = tipo;
+	}
+    
 }

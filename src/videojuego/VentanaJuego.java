@@ -6,6 +6,8 @@
 
 package videojuego;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -18,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import javax.swing.JFrame;
 
 /**
@@ -41,6 +44,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     private static Partida partida1 = new Partida();
     private static Partida partida2 = new Partida();
     private static Partida partida3 = new Partida();
+    Font fuente_1 = new Font("Lucida Console", Font.BOLD, 28);
     
     public static VentanaJuego Singleton(){
         if(instancia == null){
@@ -116,6 +120,15 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                     case Batalla:
                         batalla.dibujaBatalla(segundo);
                         break;
+                    case Perder:
+                    	segundo.setColor(Color.black);
+                    	segundo.fillRect(0, 0,Singleton().getWidth(), Singleton().getHeight());
+                    	
+                    	segundo.setColor(Color.GRAY);
+                    	segundo.setFont(fuente_1);
+                    	String aux="Tu leyenda ha terminado";
+                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*6 , Singleton().getHeight()/2);
+                    	break;
                     default:
                         menu.dibujarMenu(segundo);
                         break;
@@ -202,9 +215,6 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     	int x = e.getX();
     	int y = e.getY();
     	
-    	System.out.println("x = " + x);
-    	System.out.println("y = " + y);
-    	System.out.println();
     	
         if(pantalla.actual() == EstadoPantalla.Pantallas.MenuPrincipal){
             menuPrincipal.Siguiente = true;

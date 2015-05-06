@@ -11,7 +11,7 @@ package videojuego;
  */
 public class EstadoPantalla {
     public enum Pantallas{MenuPrincipal,Splash,CargaPartida, IniciarPartida, VerDatos,Opciones,Partida1,
-                            Partida2, Partida3, MenuPausa, Batalla}
+                            Partida2, Partida3, MenuPausa, Batalla,Perder}
     Pantallas estado= Pantallas.MenuPrincipal;
     Pantallas anterior = Pantallas.MenuPrincipal;
     Pantallas partida = Pantallas.Partida1;

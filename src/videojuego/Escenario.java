@@ -134,6 +134,9 @@ public class Escenario {
                 if(Personaje.Singleton().colisiona(irBosque)){
                 	limites.cambiaLimite();
                 	actual = Mapa.Bosque;
+                	camaraX = -880;
+                    camaraY = -460;
+                    Personaje.Singleton().setPosicion(670, 480);
                 }
                 break;
             case Bosque:
@@ -148,6 +151,9 @@ public class Escenario {
                 if(Personaje.Singleton().colisiona(irGremio)){
                 	limites.cambiaLimite();
                 	actual = Mapa.Gremio;
+                	camaraX = -880;
+                    camaraY = -170;
+                    Personaje.Singleton().setPosicion(720, 440);
                 }
                 break;
             case Gremio:
@@ -155,8 +161,19 @@ public class Escenario {
                 g.fillRect(-800,-600,2000,2000);
                 g.drawImage(mapaGremio, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 //limites.dibujaLimites(g, camaraX, camaraY);
+                //System.out.println(Personaje.Singleton().getX() + "----------------" + Personaje.Singleton().getY());
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
+                g.setColor(Color.BLACK);
+                g.fillRect(1665 + camaraX, 580 + camaraY, 10, 100);
+                Rectangle irBosque2 = new Rectangle(1665 + camaraX, 580 + camaraY, 10, 100);
+                if(Personaje.Singleton().colisiona(irBosque2)){
+                	limites.cambiaLimite();
+                	actual = Mapa.Bosque;
+                	camaraX = 0;
+                    camaraY = -170;
+                    Personaje.Singleton().setPosicion(15, 230);
+                }
                 break;
         }
         

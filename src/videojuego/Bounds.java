@@ -173,12 +173,15 @@ public class Bounds {
             return colision;
         }
         
-        public void cambiaLimite(){
+        public void cambiaLimite(int x){
         	if(actuales == limitesMapas.Mastrum){
         		actuales = limitesMapas.Bosque;
         		cambioEstado = true;
-        	} else if(actuales == limitesMapas.Bosque){
+        	} else if(actuales == limitesMapas.Bosque && x == 0){
         		actuales = limitesMapas.Gremio;
+        		cambioEstado = true;
+        	} else if(actuales == limitesMapas.Bosque && x == 1){
+        		actuales = limitesMapas.Mastrum;
         		cambioEstado = true;
         	} else {
         		actuales = limitesMapas.Bosque;

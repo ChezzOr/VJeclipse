@@ -89,6 +89,7 @@ public class Batalla {
                 }
                 break;
             case Perder:
+            	VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Perder);
                 break;
         }
         if(Siguiente&&Habilitado){
@@ -105,6 +106,8 @@ public class Batalla {
                 case Item:
                     break;
                 case Huir:
+                	anchoProta=100;
+                	anchoEnemigo=100;
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                     break;
                 case Reposo:
@@ -134,6 +137,10 @@ public class Batalla {
         	//System.out.println("entra");
         	anchoProta-=(20-Personaje.Singleton().defensa);
         	inicioEnemigo=System.currentTimeMillis();
+        	if(anchoProta<=0){
+        		estado=MenuBatalla.Perder;
+        		Habilitado=true;
+        	}
         }
         g.drawImage(combate, posicionP.getIntX(), posicionP.getIntY(), null);
         g.setColor(Color.cyan);

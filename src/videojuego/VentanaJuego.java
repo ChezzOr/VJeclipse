@@ -127,7 +127,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                     	segundo.setColor(Color.GRAY);
                     	segundo.setFont(fuente_1);
                     	String aux="Tu leyenda ha terminado";
-                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*6 , Singleton().getHeight()/2);
+                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*8 , Singleton().getHeight()/2);
                     	break;
                     default:
                         menu.dibujarMenu(segundo);

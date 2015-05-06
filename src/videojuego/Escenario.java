@@ -132,7 +132,7 @@ public class Escenario {
                 }
                 Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
                 if(Personaje.Singleton().colisiona(irBosque)){
-                	limites.cambiaLimite();
+                	limites.cambiaLimite(0);
                 	actual = Mapa.Bosque;
                 	camaraX = -880;
                     camaraY = -460;
@@ -149,11 +149,20 @@ public class Escenario {
                 g.fillRect(0 + camaraX, 375 + camaraY, 10, 100);
                 Rectangle irGremio = new Rectangle(0 + camaraX, 375 + camaraY, 10, 100);
                 if(Personaje.Singleton().colisiona(irGremio)){
-                	limites.cambiaLimite();
+                	limites.cambiaLimite(0);
                 	actual = Mapa.Gremio;
                 	camaraX = -880;
                     camaraY = -170;
                     Personaje.Singleton().setPosicion(720, 440);
+                }
+                g.fillRect(1500 + camaraX, 1030 + camaraY, 100, 10);
+                Rectangle irMastrum = new Rectangle(1500 + camaraX, 1030 + camaraY, 100, 10);
+                if(Personaje.Singleton().colisiona(irMastrum)){
+                	limites.cambiaLimite(1);
+                	actual = Mapa.Mastrum;
+                	camaraX = -880;
+                    camaraY = -170;
+                    Personaje.Singleton().setPosicion(560, 300);
                 }
                 break;
             case Gremio:
@@ -168,7 +177,7 @@ public class Escenario {
                 g.fillRect(1665 + camaraX, 580 + camaraY, 10, 100);
                 Rectangle irBosque2 = new Rectangle(1665 + camaraX, 580 + camaraY, 10, 100);
                 if(Personaje.Singleton().colisiona(irBosque2)){
-                	limites.cambiaLimite();
+                	limites.cambiaLimite(0);
                 	actual = Mapa.Bosque;
                 	camaraX = 0;
                     camaraY = -170;

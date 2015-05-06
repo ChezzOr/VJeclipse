@@ -71,12 +71,29 @@ public class Bounds {
                         limites.removeAllElements();
                         cambioEstado = false;
                     }
+                	g.setColor(Color.BLACK);
+                	limite=new Rectangle(CamX + 1620, CamY, 1000, 1200);
+                    limites.push(limite);
+                    g.fillRect(CamX + 1620, CamY, 1000, 1200);
+                    
+                    limite=new Rectangle(CamX, CamY + 1050, 5000, 300);
+                    limites.push(limite);
+                    g.fillRect(CamX, CamY + 1050, 5000, 300);
+                    
                     break;
                 case Gremio:
                 	if(cambioEstado){
                         limites.removeAllElements();
                         cambioEstado = false;
                     }
+                	g.setColor(Color.BLACK);
+                	limite=new Rectangle(CamX, CamY + 1060, 5000, 300);
+                    limites.push(limite);
+                    g.fillRect(CamX, CamY + 1060, 5000, 300);
+                    limite=new Rectangle(CamX + 1680, CamY, 300, 1500);
+                    limites.push(limite);
+                    g.fillRect(CamX + 1680, CamY, 300, 1500);
+                    
                     break;
                 default:
                     break;
@@ -87,24 +104,52 @@ public class Bounds {
         	switch(actuales){
         		case Mastrum:
         			limites.removeAllElements();
+                    
                     limite= new Rectangle(CamX, CamY, 1673, 51);
+                    limites.push(limite);
+
+                    limite= new Rectangle(CamX, CamY, 60, 1500);
                     limites.push(limite);
 
                     limite= new Rectangle(CamX, CamY+270, 365, 503);
                     limites.push(limite);
-
-                    limite= new Rectangle(CamX+900, CamY+400, 100, 100);
+                    
+                    limite= new Rectangle(CamX + 40, CamY + 900, 50, 200);
                     limites.push(limite);
-
+                    
                     limite=new Rectangle(CamX+1300, CamY, 501, 301);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX + 60, CamY + 950, 1270, 300);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX + 650, CamY + 900, 100, 300);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX + 1300, CamY + 1010, 1000, 300);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX + 1620, CamY, 1000, 1200);
                     limites.push(limite);
                     break;
         		case Bosque:
         			limites.removeAllElements();
-                    break;
+        			limite=new Rectangle(CamX + 1620, CamY, 1000, 1200);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX, CamY + 1050, 5000, 300);
+                    limites.push(limite);
+                    
+        			break;
         		case Gremio:
         			limites.removeAllElements();
-                    break;
+        			limite=new Rectangle(CamX, CamY + 1060, 5000, 300);
+                    limites.push(limite);
+                    
+                    limite=new Rectangle(CamX + 1680, CamY, 300, 1500);
+                    limites.push(limite);
+                    
+        			break;
         	}
         }
         

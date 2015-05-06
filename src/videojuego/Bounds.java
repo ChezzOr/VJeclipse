@@ -34,18 +34,37 @@ public class Bounds {
                     limites.push(limite);
                     g.fillRect(CamX, CamY, 1673, 51);
 
+                    limite= new Rectangle(CamX, CamY, 60, 1500);
+                    limites.push(limite);
+                    g.fillRect(CamX, CamY, 40, 1500);
+
                     limite= new Rectangle(CamX, CamY+270, 365, 503);
                     limites.push(limite);
                     g.fillRect(CamX, CamY+270, 365, 503);
                     
-                    limite= new Rectangle(CamX+900, CamY+400, 100, 100);
+                    limite= new Rectangle(CamX + 40, CamY + 900, 50, 200);
                     limites.push(limite);
-                    g.fillRect(CamX+900, CamY+400, 100, 100);
+                    g.fillRect(CamX + 40, CamY + 900, 20, 200);
                     
                     limite=new Rectangle(CamX+1300, CamY, 501, 301);
                     limites.push(limite);
                     g.fillRect(CamX+1300, CamY, 501, 301);
                     
+                    limite=new Rectangle(CamX + 60, CamY + 950, 1270, 300);
+                    limites.push(limite);
+                    g.fillRect(CamX + 60, CamY + 950, 1270, 300);
+                    
+                    limite=new Rectangle(CamX + 650, CamY + 900, 100, 300);
+                    limites.push(limite);
+                    g.fillRect(CamX + 650, CamY + 900, 100, 300);
+                    
+                    limite=new Rectangle(CamX + 1300, CamY + 1010, 1000, 300);
+                    limites.push(limite);
+                    g.fillRect(CamX + 1300, CamY + 1010, 1000, 300);
+                    
+                    limite=new Rectangle(CamX + 1620, CamY, 1000, 1200);
+                    limites.push(limite);
+                    g.fillRect(CamX + 1620, CamY, 1000, 1200);
                     break;
                 case Bosque:
                 	if(cambioEstado){

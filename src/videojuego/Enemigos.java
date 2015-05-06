@@ -24,7 +24,6 @@ public class Enemigos {
     private Rectangle Imagen=null;
     public int x,y,ancho,alto;
     private boolean vivo;
-    public static boolean colision=false;
     
     public void  creaEnemigo(int x, int y, int ancho, int alto){
         this.x=x;
@@ -45,14 +44,12 @@ public class Enemigos {
     }
     
     public void dibujaEnemigo(Graphics g,int CamX, int CamY){
-        //modificaEnemigos(actual, CamX, CamY);
     	if(!vivo){
     		return;
     	}
     	modificaEnemigo(CamX,CamY);
         g.setColor(Color.red);
         g.fillRect(Imagen.x, Imagen.y, Imagen.width,Imagen.height);
-        //g.fillRect(R.Imagen.x,R.Imagen.y,R.Imagen.width,R.Imagen.height);
     }
     
     public boolean colision(){

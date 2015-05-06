@@ -104,26 +104,30 @@ public class Escenario {
     public void dibujaEscenario(Graphics g){
         
         if(inicio){
-        	enemigos[0]= new Enemigos();
-            enemigos[0].creaEnemigo(1075,60, 200, 110);
-            enemigos[1]= new Enemigos();
-            enemigos[1].creaEnemigo(440, 765, 165, 110);
-            enemigos[2]= new Enemigos();
-            enemigos[2].creaEnemigo(1110, 580, 100, 100);
-            enemigos[3]= new Enemigos();
-            enemigos[3].creaEnemigo(1370, 800, 100, 100);
-            enemigos[4]= new Enemigos();
-            enemigos[4].creaEnemigo(300, 200, 100, 100);
-            enemigos[5]= new Enemigos();
-            enemigos[5].creaEnemigo(400, 450, 100, 100);
-            enemigos[6]= new Enemigos();
-            enemigos[6].creaEnemigo(500, 700, 100, 100);
-            enemigos[7]= new Enemigos();
-            enemigos[7].creaEnemigo(300, 200, 100, 100);
-            enemigos[8]= new Enemigos();
-            enemigos[8].creaEnemigo(400, 450, 100, 100);
-            enemigos[9]= new Enemigos();
-            enemigos[9].creaEnemigo(500, 700, 100, 100);
+        	switch(actual){
+        		case Mastrum:
+        			enemigos[0]= new Enemigos();
+		            enemigos[0].creaEnemigo(1075,60, 200, 110);
+		            enemigos[1]= new Enemigos();
+		            enemigos[1].creaEnemigo(440, 765, 165, 110);
+		            enemigos[2]= new Enemigos();
+		            enemigos[2].creaEnemigo(1110, 580, 100, 100);
+		            enemigos[3]= new Enemigos();
+		            enemigos[3].creaEnemigo(1370, 800, 100, 100);
+        			enemigos[4]= new Enemigos();
+    	            enemigos[4].creaEnemigo(300, 200, 100, 100);
+    	            enemigos[5]= new Enemigos();
+    	            enemigos[5].creaEnemigo(400, 450, 100, 100);
+    	            enemigos[6]= new Enemigos();
+    	            enemigos[6].creaEnemigo(500, 700, 100, 100);
+        			enemigos[7]= new Enemigos();
+                    enemigos[7].creaEnemigo(300, 200, 100, 100);
+                    enemigos[8]= new Enemigos();
+                    enemigos[8].creaEnemigo(400, 450, 100, 100);
+                    enemigos[9]= new Enemigos();
+                    enemigos[9].creaEnemigo(500, 700, 100, 100);
+        	}
+        	
             item[0] = new Item(730, 330, atributo.vida);
             item[1] = new Item(470, 580, atributo.poder);
             item[2] = new Item(200, 820, atributo.especial);
@@ -137,6 +141,10 @@ public class Escenario {
             boss= new Jefe();
             boss.creaJefe(mapaMastrum.getWidth(null) - 290, 320,50,50);
         }
+        jefe=false;
+        enemigo=false;
+        batalla=null;
+        batalla=new Batalla();
         activo=false;
         switch(actual){
             case Mastrum:
@@ -234,17 +242,13 @@ public class Escenario {
             	g.setColor(Color.BLUE);
                 g.fillRect(-800,-600,2000,2000);
                 g.drawImage(mapaGremio, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
-                //limites.dibujaLimites(g, camaraX, camaraY);
-                //System.out.println(Personaje.Singleton().getX() + "----------------" + Personaje.Singleton().getY());
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=7;i<10;i++){
-                	/*if(i==enBatalla && eliminar){
-                		enemigos[i].setVivo(false);
-                	}*/
             		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
             		colisionEnemigos(enemigos[i],i);
-                }for(int a=6;a<9;a++){
+                }
+                for(int a=6;a<9;a++){
                 	item[a].dibujarItem(g, camaraX, camaraY);
                 	colisionItems(item[a], a);
                 }
@@ -295,18 +299,22 @@ public class Escenario {
 	        default:
 	            break;
 	    }
-    	
+    	if(boss.getVida()<=0){
+        	return;
+        }
     	jefe=true;
     	enemigo=false;
-    	batalla.isJefe();
+    	batalla.Posicion=true;
+    	batalla.setJefe(j);
     	VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Batalla);
     }
     
     public void colisionEnemigos(Enemigos N,int a){
-    	if(N.colision()){
+    	if(N.colision() && N.isVivo()){
     		colisionEnemigo=true;
     		enBatalla=a;
     	}
+    	//System.out.println(N+"-"+N.colision());
     	if(colisionEnemigo){
             switch(Personaje.Singleton().direccion){
                 case avanzarIzquierda:
@@ -324,10 +332,14 @@ public class Escenario {
                 default:
                     break;
             }
+            if(N.getVida()<=0){
+            	return;
+            }
             jefe=false;
             enemigo=true;
             colisionEnemigo=false;
-            batalla.isEnemigo();
+            batalla.Posicion=true;
+            batalla.setEnemigo(N);
             VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Batalla);
         }
     }
@@ -336,11 +348,11 @@ public class Escenario {
     	if(N.colision()){
     		colisionItem=true;
     		// VentanaJuego.getInventario().guardarItem(N);
-    		System.out.println("holi");
+    		//System.out.println("holi");
     	}
     	if(colisionItem){
             N.borraItem();
-            System.out.println("lol");
+            //System.out.println("lol");
             colisionItem=false;
         }
     }
@@ -354,17 +366,21 @@ public class Escenario {
     }
     
     public void destruyeEnemigo(int destruye){
-    	System.out.println(enBatalla);
-    	System.out.println(destruye);
-    	//eliminar=true;
     	enemigos[destruye].setVivo(false);
+    	enemigos[destruye].setVida(0);
     	Personaje.Singleton().setExp(enemigos[enBatalla].getExp());
-    	batalla= new Batalla();
+    	batalla=null;
+    	batalla=new Batalla();
+    	return;
+    	
     }
     
     public void destruyeJefe(){
     	boss.setVivo(false);
-    	batalla= new Batalla();
+    	boss.setVida(0);
+    	batalla=null;
+    	batalla=new Batalla();
+    	return;
     }
     
     public void comandoTecla(KeyEvent e){

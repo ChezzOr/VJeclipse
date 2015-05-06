@@ -50,9 +50,30 @@ public class Batalla {
         setPosicion(VentanaJuego.Singleton().getWidth()/2, VentanaJuego.Singleton().getHeight()/2);
         inicioPersonaje=System.currentTimeMillis();
         inicioEnemigo=inicioPersonaje;
+        System.out.println(Escenario.Singleton().isEnemigo()+"-"+Escenario.Singleton().isJefe());
+        if(Escenario.Singleton().isEnemigo()){
+        	anchoEnemigo=Escenario.Singleton().batalla().getVida();
+        	ataqueEnemigo=Escenario.Singleton().batalla().getAtaque();
+        	defensaEnemigo=Escenario.Singleton().batalla().getDefensa();
+        	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
+        }
+        if(Escenario.Singleton().isJefe()){
+        	anchoEnemigo=Escenario.Singleton().bossBattle().getVida();
+        	ataqueEnemigo=Escenario.Singleton().bossBattle().getAtk();
+        	defensaEnemigo=Escenario.Singleton().bossBattle().getDef();
+        	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
+        }
     }
     
-    void setPosicion(int x, int y){
+    public void setEnemigo(Enemigos N){
+    	anchoEnemigo=N.getVida();
+    }
+    
+    public void setJefe(Jefe j){
+    	anchoEnemigo=j.getVida();
+    }
+    
+    public void setPosicion(int x, int y){
         posicionP = new Vec(x-200,y);
         posicionE = new Vec(x+200,y);
     }
@@ -89,11 +110,14 @@ public class Batalla {
                 if(Siguiente){
                     estado=MenuBatalla.Reposo;
                     if(Escenario.Singleton().isEnemigo()){
+                    	System.out.println(Escenario.Singleton().enBatalla);
                     	Escenario.Singleton().destruyeEnemigo(Escenario.Singleton().enBatalla);
                     }
                     if(Escenario.Singleton().isJefe()){
                     	Escenario.Singleton().destruyeJefe();
                     }
+                    jefe=false;
+                	isEnemigo=false;
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                 }
                 break;
@@ -115,6 +139,8 @@ public class Batalla {
                 case Item:
                     break;
                 case Huir:
+                	jefe=false;
+                	isEnemigo=false;
                 	anchoProta=100;
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                     break;
@@ -126,22 +152,9 @@ public class Batalla {
     }
     
     public void dibujaBatalla(Graphics g){
-        if(Posicion){
+    	if(Posicion){
             inicia();
             Posicion=false;
-            System.out.println(Escenario.Singleton().isEnemigo()+"-"+Escenario.Singleton().isJefe());
-            if(Escenario.Singleton().isEnemigo()){
-            	anchoEnemigo=Escenario.Singleton().batalla().getVida();
-            	ataqueEnemigo=Escenario.Singleton().batalla().getAtaque();
-            	defensaEnemigo=Escenario.Singleton().batalla().getDefensa();
-            	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
-            }
-            if(Escenario.Singleton().isJefe()){
-            	anchoEnemigo=Escenario.Singleton().bossBattle().getVida();
-            	ataqueEnemigo=Escenario.Singleton().bossBattle().getAtk();
-            	defensaEnemigo=Escenario.Singleton().bossBattle().getDef();
-            	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
-            }
         }
         g.setColor(Color.black);
         g.fillRect(0, 0, VentanaJuego.Singleton().getWidth(), VentanaJuego.Singleton().getHeight());

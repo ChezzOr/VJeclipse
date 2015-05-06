@@ -104,39 +104,35 @@ public class Escenario {
     public void dibujaEscenario(Graphics g){
         
         if(inicio){
-        	switch(actual){
-        		case Mastrum:
-        			enemigos[0]= new Enemigos();
-		            enemigos[0].creaEnemigo(1075,60, 200, 110);
-		            enemigos[1]= new Enemigos();
-		            enemigos[1].creaEnemigo(440, 765, 165, 110);
-		            enemigos[2]= new Enemigos();
-		            enemigos[2].creaEnemigo(1110, 580, 100, 100);
-		            enemigos[3]= new Enemigos();
-		            enemigos[3].creaEnemigo(1370, 800, 100, 100);
-        			enemigos[4]= new Enemigos();
-    	            enemigos[4].creaEnemigo(300, 200, 100, 100);
-    	            enemigos[5]= new Enemigos();
-    	            enemigos[5].creaEnemigo(400, 450, 100, 100);
-    	            enemigos[6]= new Enemigos();
-    	            enemigos[6].creaEnemigo(500, 700, 100, 100);
-        			enemigos[7]= new Enemigos();
-                    enemigos[7].creaEnemigo(300, 200, 100, 100);
-                    enemigos[8]= new Enemigos();
-                    enemigos[8].creaEnemigo(400, 450, 100, 100);
-                    enemigos[9]= new Enemigos();
-                    enemigos[9].creaEnemigo(500, 700, 100, 100);
-        	}
-        	
+        	enemigos[0]= new Enemigos();
+            enemigos[0].creaEnemigo(1075,60, 200, 110);
+            enemigos[1]= new Enemigos();
+            enemigos[1].creaEnemigo(440, 765, 165, 110);
+            enemigos[2]= new Enemigos();
+            enemigos[2].creaEnemigo(1110, 580, 100, 100);
+            enemigos[3]= new Enemigos();
+            enemigos[3].creaEnemigo(1370, 800, 100, 100);
+            enemigos[4]= new Enemigos();
+            enemigos[4].creaEnemigo(400, 200, 100, 100);
+            enemigos[5]= new Enemigos();
+            enemigos[5].creaEnemigo(1000, 350, 100, 100);
+            enemigos[6]= new Enemigos();
+            enemigos[6].creaEnemigo(1100, 900, 100, 100);
+            enemigos[7]= new Enemigos();
+            enemigos[7].creaEnemigo(720, 380, 100, 100);
+            enemigos[8]= new Enemigos();
+            enemigos[8].creaEnemigo(540, 450, 100, 100);
+            enemigos[9]= new Enemigos();
+            enemigos[9].creaEnemigo(150, 575, 100, 100);
             item[0] = new Item(730, 330, atributo.vida);
             item[1] = new Item(470, 580, atributo.poder);
             item[2] = new Item(200, 820, atributo.especial);
-            item[3] = new Item(500, 200, atributo.vida);
-            item[4] = new Item(600, 400, atributo.poder);
-            item[5] = new Item(100, 700, atributo.especial);
-            item[6] = new Item(500, 200, atributo.vida);
-            item[7] = new Item(600, 400, atributo.poder);
-            item[8] = new Item(100, 700, atributo.especial);
+            item[3] = new Item(1500, 200, atributo.vida);
+            item[4] = new Item(400, 650, atributo.poder);
+            item[5] = new Item(100, 650, atributo.especial);
+            item[6] = new Item(1300, 500, atributo.vida);
+            item[7] = new Item(1100, 500, atributo.poder);
+            item[8] = new Item(600, 575, atributo.especial);
             inicio=false;
             boss= new Jefe();
             boss.creaJefe(mapaMastrum.getWidth(null) - 290, 320,50,50);

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Inventario {
 	
@@ -18,15 +19,10 @@ public class Inventario {
 	
 	private Font fuente_1 = new Font("Lucida Console", Font.BOLD, 28);
     private Font fuente_2 = new Font("Lucida Console", Font.BOLD, 26);
-    
-    private Image pocion = DiccionarioImagenes.Singleton().imagen("Inventario/pocion_salud.png");
 	
     
 	private int x = 90, y = 68;
 	
-	public Inventario(){
-		guardarItem();
-	}
 	
 	public void dibujaConsulta(Graphics g){
 		 g.drawImage(imgInventario, x, y, null);
@@ -44,11 +40,15 @@ public class Inventario {
 	        g.drawString("Inventario", 305, 130);
 	        g.setFont(fuente_2);
 	        g.drawString("Presiona 'Enter' para regresar", 150, 490);
+	        
+	        dibujarItems(g);
 
 	}
 	
-	public void guardarItem(){
-		//inventario.add(pocion);
+	public void guardarItem(Item e){
+		if(inventario.size() < 16){
+			inventario.add(e);
+		}
 	}
 	
 	public Status getEstado(){
@@ -56,6 +56,36 @@ public class Inventario {
 	}
 	
 	public void dibujarItems(Graphics g){
-		//g.drawImage((Image)inventario.get(0), 267, 175, null);
+		int k = 1, x = 269, y = 176;
+		Item aux;
+		
+		Iterator it = inventario.iterator();
+		while(it.hasNext()){
+			aux = (Item)it.next();
+			
+			switch(aux.getTipo()){
+				case vida:
+					g.drawImage(aux.getImagenVida(), x, y, null);
+				break;
+				
+				case especial:
+					g.drawImage(aux.getImagenEspecial(), x, y, null);
+				break;
+				
+				case poder:
+					g.drawImage(aux.getImagenPoder(), x, y, null);
+				break;
+			}
+			
+			if(k % 4 == 0){
+				x = 269;
+				y += 30;
+			}else{
+				x += 68;
+			}
+			
+			k++;
+			
+		}
 	}
 }

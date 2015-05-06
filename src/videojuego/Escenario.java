@@ -218,6 +218,7 @@ public class Escenario {
     public void colisionItems(Item N,int a){
     	if(N.colision()){
     		colisionItem=true;
+    		VentanaJuego.getInventario().guardarItem(N);
     	}
     	if(colisionItem){
             N.borraItem();

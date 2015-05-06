@@ -130,6 +130,7 @@ public class Escenario {
                 	item[i].dibujarItem(g, camaraX, camaraY);
                 	colisionItems(item[i], i);
                 }
+                
                 Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
                 if(Personaje.Singleton().colisiona(irBosque)){
                 	limites.cambiaLimite(0);
@@ -218,10 +219,12 @@ public class Escenario {
     public void colisionItems(Item N,int a){
     	if(N.colision()){
     		colisionItem=true;
-    		VentanaJuego.getInventario().guardarItem(N);
+    		// VentanaJuego.getInventario().guardarItem(N);
+    		System.out.println("holi");
     	}
     	if(colisionItem){
             N.borraItem();
+            System.out.println("lol");
             colisionItem=false;
         }
     }

@@ -46,7 +46,7 @@ public class Inventario {
 	}
 	
 	public void guardarItem(Item e){
-		if(inventario.size() < 16){
+		if(inventario.size() <= 16){
 			inventario.add(e);
 		}
 	}
@@ -79,7 +79,7 @@ public class Inventario {
 			
 			if(k % 4 == 0){
 				x = 269;
-				y += 30;
+				y += 61;
 			}else{
 				x += 68;
 			}

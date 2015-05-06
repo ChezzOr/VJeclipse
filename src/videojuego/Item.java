@@ -27,6 +27,7 @@ public class Item {
     int ancho = VentanaJuego.Singleton().getWidth();
     int alto = VentanaJuego.Singleton().getHeight();
     boolean recogido;
+    boolean inventado = false;
     
     public Item(int x, int y, atributo tipoAtributo) {
         pos = new Vec(x, y);
@@ -69,6 +70,10 @@ public class Item {
     
     public void borraItem(){
     	recogido = true;
+    	if(!inventado){
+    		VentanaJuego.getInventario().guardarItem(this);
+    		inventado = true;
+    	}
     }
 
 	public Image getImagenVida() {

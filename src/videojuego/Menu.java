@@ -217,19 +217,19 @@ public class Menu {
         g.setFont(fuente_2);
         
         g.setColor(Color.BLACK);
-        g.drawString("Â¿Salir del juego?", 253, 278);
-        g.drawString("SÃ­", 303, 353);
+        g.drawString("¿Salir del juego?", 253, 278);
+        g.drawString("Sí", 303, 353);
         g.drawString("No", 453, 353);
         
         g.setColor(Color.WHITE);
-        g.drawString("Â¿Salir del juego?", 250, 275);
-        g.drawString("SÃ­", 300, 350);
+        g.drawString("¿Salir del juego?", 250, 275);
+        g.drawString("Sí", 300, 350);
         g.drawString("No", 450, 350);
         
         switch(salir){
             case Si:
                 g.setColor(Color.yellow);
-                g.drawString("SÃ­", 300, 350);
+                g.drawString("Sí", 300, 350);
             break;
                 
             case No:

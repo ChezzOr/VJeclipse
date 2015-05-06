@@ -45,6 +45,7 @@ public class Escenario {
     boolean fueraD=false;
     boolean activo;
     boolean colisionEnemigo=false;
+    boolean colisionItem=false;
     private enum mov{cam,per,none}
     public enum dir{X,Y,none}
     public enum col{U,D,L,R,none}
@@ -53,7 +54,7 @@ public class Escenario {
     public static Vec pasada=new Vec();
     public static int posicionEnemigo=0;
     public static Enemigos enemigos[]= new Enemigos[10];
-    public static Item item;
+    public static Item[] item = new Item[3];
     public static int enBatalla;
     public boolean eliminar;
     private static boolean inicio=true;
@@ -104,7 +105,9 @@ public class Escenario {
                 a+=100;
                 b+=250;
             }
-            item = new Item(500, 200, atributo.vida);
+            item[0] = new Item(500, 200, atributo.vida);
+            item[1] = new Item(600, 400, atributo.poder);
+            item[2] = new Item(100, 700, atributo.especial);
             inicio=false;
         }
         activo=false;
@@ -116,7 +119,6 @@ public class Escenario {
                 g.drawImage(mapaMastrum, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 Personaje.Singleton().dibujarPersonaje(g);
                 limites.dibujaLimites(g,camaraX,camaraY);
-                item.dibujarItem(g, camaraX, camaraY);
                 Personaje.Singleton().movimiento(dirCol,false);
                 for(int i=0;i<4;i++){
                 	/*if(i==enBatalla && eliminar){
@@ -124,6 +126,9 @@ public class Escenario {
                 	}*/
             		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
             		colisionEnemigos(enemigos[i],i);
+                }for(int i=0;i<3;i++){
+                	item[i].dibujarItem(g, camaraX, camaraY);
+                	colisionItems(item[i], i);
                 }
                 Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
                 if(Personaje.Singleton().colisiona(irBosque)){
@@ -181,6 +186,16 @@ public class Escenario {
             }
             colisionEnemigo=false;
             VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Batalla);
+        }
+    }
+    
+    public void colisionItems(Item N,int a){
+    	if(N.colision()){
+    		colisionItem=true;
+    	}
+    	if(colisionItem){
+            N.borraItem();
+            colisionItem=false;
         }
     }
     

@@ -160,22 +160,6 @@ public class Menu {
     
     public void consultarInventario(Graphics g){
     	VentanaJuego.getInventario().dibujaConsulta(g);
-    	
-        /*g.drawImage(imgInventario, x, y, null);
-        g.drawImage(imgCasillasInventario, 255, 165, null);
-        // Pintar las sombras
-        g.setColor(Color.BLACK);
-        g.setFont(fuente_1);
-        g.drawString("Inventario", 308, 133);
-        g.setFont(fuente_2);
-        g.drawString("Presiona 'Enter' para regresar", 153, 493);
-        
-        // Pintar el color blanco
-        g.setColor(Color.WHITE);
-        g.setFont(fuente_1);
-        g.drawString("Inventario", 305, 130);
-        g.setFont(fuente_2);
-        g.drawString("Presiona 'Enter' para regresar", 150, 490);*/
     }
     
     public void verCaracteristicas(Graphics g){
@@ -309,6 +293,12 @@ public class Menu {
                 
             case KeyEvent.VK_ENTER:
                 if(salir == Salir.Si){
+                	Escenario.Singleton().setInstancia(null);
+                	VentanaJuego.Singleton().setInventario(null);
+                	
+                	VentanaJuego.Singleton().setInventario(new Inventario());
+
+
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.MenuPrincipal);
                 }else if(salir == Salir.No){
                     next = false;
@@ -337,7 +327,6 @@ public class Menu {
                 
             case KeyEvent.VK_ENTER:
                 if(estadoPartida == GuardarPartida.Si){
-                    VentanaJuego.Singleton().guardarPartidas();
                     next = false;
                     estadoPartida = GuardarPartida.No;
                 }else if(estadoPartida == GuardarPartida.No){

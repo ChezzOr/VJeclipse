@@ -27,7 +27,7 @@ public class Jefe {
 	        Imagen=new Rectangle(x,y,ancho,alto);
 	        vida=140;
 	        ataque=35;
-	        defensa=20;
+	        defensa=30;
 	        stamina=100;
 	        regen=15;
 	        costo=25;

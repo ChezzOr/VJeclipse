@@ -15,6 +15,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFrame;
 
@@ -52,6 +57,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
             instancia.addMouseListener(instancia);
             instancia.addMouseMotionListener(instancia);
             instancia.setResizable(false);
+            cargarPartidas();
         }
         return instancia;
     }
@@ -287,6 +293,57 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
         return menu;
     }
     
+    // Método para guardar las partidas...
+    public void salvarPartida(Object partida, String archivo) throws IOException{
+        ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(archivo));
+        salida.writeObject(partida);
+        salida.flush();
+        salida.close();
+    }
+    
+    public static Object leerPartida(String archivo) throws IOException, ClassNotFoundException{
+        ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(archivo));
+        Object partidaGuardada = entrada.readObject();
+        entrada.close();
+        return partidaGuardada;
+    }
+    
+    public void guardarPartidas(){
+        
+        partida1.setExperiencia(partida1.getExperiencia() + 15);
+        partida1.setNivel(2);
+        partida1.setVida(95);
+        
+        //partida1.setExperiencia(0);
+        //partida1.setNivel(1);
+        //partida1.setVida(100);
+        
+        try{
+            switch(pantalla.getPartida()){
+                case Partida1:
+                    salvarPartida(partida1, "Partida1.obj");
+                    break;
+                    
+                case Partida2:
+                    salvarPartida(partida2, "Partida2.obj");
+                    break;
+                    
+                case Partida3:
+                    salvarPartida(partida3, "Partida3.obj");
+                    break;
+            }
+        }catch(Exception ex){}
+    }
+    
+    public static void cargarPartidas(){
+        try{
+            partida1 = (Partida)leerPartida("Partida1.obj");
+            partida2 = (Partida)leerPartida("Partida2.obj");
+            partida3 = (Partida)leerPartida("Partida3.obj");
+        }
+        catch(Exception ex){
+        }
+    }
     
     public Partida PartidaActual(){
         Partida nueva = new Partida();
@@ -311,10 +368,6 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     
     public static Inventario getInventario(){
     	return inventario;
-    }
-    
-    public static void setInventario(Inventario inv){
-    	inventario = inv;
     }
     
 }

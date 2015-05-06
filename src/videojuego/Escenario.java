@@ -550,13 +550,4 @@ public class Escenario {
 	public Batalla actualB(){
 		return batalla;
 	}
-	
-	public static void setInstancia(Escenario instancia) {
-		Escenario.instancia = instancia;
-		if(instancia == null){
-			Escenario.instancia = new Escenario();
-			Escenario.instancia.inicia();
-			inicio = true;
-		}
-	}
 }

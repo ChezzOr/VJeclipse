@@ -41,7 +41,7 @@ public class Enemigos {
     }
     
     public void modificaEnemigo( int CamX, int CamY){
-        Imagen= new Rectangle(x+CamX,y+CamY,100,100);
+        Imagen= new Rectangle(x+CamX,y+CamY,ancho,alto);
     }
     
     public void dibujaEnemigo(Graphics g,int CamX, int CamY){

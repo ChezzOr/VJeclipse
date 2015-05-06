@@ -59,6 +59,11 @@ public class Escenario {
     public boolean eliminar;
     private static boolean inicio=true;
     
+    public Rectangle irBosque;
+    public Rectangle irBosque2;
+    public Rectangle irMastrum;
+    public Rectangle irGremio;
+    
     public static Escenario Singleton(){
         if(instancia==null){
             instancia= new Escenario();
@@ -110,6 +115,7 @@ public class Escenario {
             item[2] = new Item(100, 700, atributo.especial);
             inicio=false;
         }
+        System.out.println(camaraX+"-"+camaraY);
         activo=false;
         switch(actual){
             case Mastrum:
@@ -131,13 +137,20 @@ public class Escenario {
                 	colisionItems(item[i], i);
                 }
                 
-                Rectangle irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
+                irBosque = new Rectangle(mapaMastrum.getWidth(null) - 300 + camaraX, 320 + camaraY, 200, 5);
                 if(Personaje.Singleton().colisiona(irBosque)){
                 	limites.cambiaLimite(0);
                 	actual = Mapa.Bosque;
-                	camaraX = -880;
-                    camaraY = -460;
-                    Personaje.Singleton().setPosicion(670, 480);
+                	Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
+                	        VentanaJuego.Singleton().getHeight()/2);
+                	 camaraX=-ancho/2;
+                	 camaraY=-alto/2;
+                	 fueraL=false;
+                	 fueraR=false;
+                	 fueraU=false;
+                	 fueraD=false;
+                	 fueraCamaraX=false;
+                	 fueraCamaraY=false;
                 }
                 break;
             case Bosque:
@@ -148,22 +161,36 @@ public class Escenario {
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
                 g.fillRect(0 + camaraX, 375 + camaraY, 10, 100);
-                Rectangle irGremio = new Rectangle(0 + camaraX, 375 + camaraY, 10, 100);
+                irGremio = new Rectangle(0 + camaraX, 375 + camaraY, 10, 100);
                 if(Personaje.Singleton().colisiona(irGremio)){
                 	limites.cambiaLimite(0);
                 	actual = Mapa.Gremio;
-                	camaraX = -880;
-                    camaraY = -170;
-                    Personaje.Singleton().setPosicion(720, 440);
+                	Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
+                	        VentanaJuego.Singleton().getHeight()/2);
+                	camaraX=-ancho/2;
+               	 	camaraY=-alto/2;
+	               	 fueraL=false;
+	               	 fueraR=false;
+	               	 fueraU=false;
+	               	 fueraD=false;
+	               	 fueraCamaraX=false;
+	               	 fueraCamaraY=false;
                 }
                 g.fillRect(1500 + camaraX, 1030 + camaraY, 100, 10);
-                Rectangle irMastrum = new Rectangle(1500 + camaraX, 1030 + camaraY, 100, 10);
+                irMastrum = new Rectangle(1500 + camaraX, 1030 + camaraY, 100, 10);
                 if(Personaje.Singleton().colisiona(irMastrum)){
                 	limites.cambiaLimite(1);
                 	actual = Mapa.Mastrum;
-                	camaraX = -880;
-                    camaraY = -170;
-                    Personaje.Singleton().setPosicion(560, 300);
+                	Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
+                	        VentanaJuego.Singleton().getHeight()/2);
+                	camaraX=-ancho/2;
+               	 	camaraY=-alto/2;
+	               	 fueraL=false;
+	               	 fueraR=false;
+	               	 fueraU=false;
+	               	 fueraD=false;
+	               	 fueraCamaraX=false;
+	               	 fueraCamaraY=false;
                 }
                 break;
             case Gremio:
@@ -176,13 +203,20 @@ public class Escenario {
                 Personaje.Singleton().movimiento(dirCol,false);
                 g.setColor(Color.BLACK);
                 g.fillRect(1665 + camaraX, 580 + camaraY, 10, 100);
-                Rectangle irBosque2 = new Rectangle(1665 + camaraX, 580 + camaraY, 10, 100);
+                irBosque2 = new Rectangle(1665 + camaraX, 580 + camaraY, 10, 100);
                 if(Personaje.Singleton().colisiona(irBosque2)){
                 	limites.cambiaLimite(0);
                 	actual = Mapa.Bosque;
-                	camaraX = 0;
-                    camaraY = -170;
-                    Personaje.Singleton().setPosicion(15, 230);
+                	Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
+                	        VentanaJuego.Singleton().getHeight()/2);
+                	camaraX=-ancho/2;
+               	 	camaraY=-alto/2;	
+	               	 fueraL=false;
+	               	 fueraR=false;
+	               	 fueraU=false;
+	               	 fueraD=false;
+	               	 fueraCamaraX=false;
+	               	 fueraCamaraY=false;
                 }
                 break;
         }

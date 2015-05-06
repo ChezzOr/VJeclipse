@@ -159,7 +159,9 @@ public class Menu {
     }
     
     public void consultarInventario(Graphics g){
-        g.drawImage(imgInventario, x, y, null);
+    	VentanaJuego.getInventario().dibujaConsulta(g);
+    	
+        /*g.drawImage(imgInventario, x, y, null);
         g.drawImage(imgCasillasInventario, 255, 165, null);
         // Pintar las sombras
         g.setColor(Color.BLACK);
@@ -173,7 +175,7 @@ public class Menu {
         g.setFont(fuente_1);
         g.drawString("Inventario", 305, 130);
         g.setFont(fuente_2);
-        g.drawString("Presiona 'Enter' para regresar", 150, 490);
+        g.drawString("Presiona 'Enter' para regresar", 150, 490);*/
     }
     
     public void verCaracteristicas(Graphics g){

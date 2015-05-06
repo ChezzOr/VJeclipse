@@ -36,6 +36,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     private static Opciones opciones = new Opciones();
     private static Menu menu = new Menu();
     private static Batalla batalla= new Batalla();
+    private static Inventario inventario = new Inventario();
     
     private static Partida partida1 = new Partida();
     private static Partida partida2 = new Partida();
@@ -97,6 +98,8 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                         break;
                     
                     case Partida1:
+                    case Partida2:
+                    case Partida3:
                         escenario.dibujaEscenario(segundo);
                         if(pantalla.anterior() == EstadoPantalla.Pantallas.Opciones){
                             pantalla.cambiar(EstadoPantalla.Pantallas.MenuPausa);
@@ -195,6 +198,14 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
 
     @Override
     public void mousePressed(MouseEvent e) {
+    	
+    	int x = e.getX();
+    	int y = e.getY();
+    	
+    	System.out.println("x = " + x);
+    	System.out.println("y = " + y);
+    	System.out.println();
+    	
         if(pantalla.actual() == EstadoPantalla.Pantallas.MenuPrincipal){
             menuPrincipal.Siguiente = true;
         }else if(pantalla.actual() == EstadoPantalla.Pantallas.IniciarPartida){
@@ -331,11 +342,11 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                 break;
                 
             case Partida2:
-                nueva = partida1;
+                nueva = partida2;
                 break;
                 
             case Partida3:
-                nueva = partida1;
+                nueva = partida3;
                 break;
         }
         
@@ -344,6 +355,10 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     
     public void nuevaBatalla(){
     	batalla=new Batalla();
+    }
+    
+    public static Inventario getInventario(){
+    	return inventario;
     }
     
 }

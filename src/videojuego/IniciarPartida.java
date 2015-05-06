@@ -62,7 +62,7 @@ public class IniciarPartida {
                 g.fillRoundRect(ancho/2-200, alto/2-40, ancho/2+100, alto/4,10,10);
                 if(siguiente){
                     siguiente = false;
-                    VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
+                    VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida2);
                 }
                 break;
             case file_3:
@@ -70,7 +70,7 @@ public class IniciarPartida {
                 g.fillRoundRect(ancho/2-200, alto/2+120, ancho/2+100, alto/4,10,10);
                 if(siguiente){
                     siguiente = false;
-                    VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
+                    VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida3);
                 }
                 break;
             case regresar:

@@ -22,25 +22,29 @@ public class Batalla {
     public enum Destruido{Verdadero,Falso}
     public Rectangle enemigo=null;
     public Personaje personaje=new Personaje();
-    Font fuente_1 = new Font("Lucida Console", Font.BOLD, 28);
-    Image combate=DiccionarioImagenes.Singleton().imagen("ProtaDer.png");;
-    boolean Derecha=true;
-    Vec posicionP=new Vec();
-    Vec posicionE=new Vec();
-    MenuBatalla estado=MenuBatalla.Atacar;
-    boolean Siguiente=false;
-    boolean Posicion=true;
-    boolean destruido=false;
-    int anchoProta = 100;
-    int anchoEnemigo = 100;
-    int xProta = 150;
-    Variables var=new Variables();
-    boolean ataque=false;
-    long inicioPersonaje;
-    long limitePersonaje=1000;
-    long inicioEnemigo;
-    long limiteEnemigo=950;
-    boolean Habilitado=false;
+    public Font fuente_1 = new Font("Lucida Console", Font.BOLD, 28);
+    public Image combate=DiccionarioImagenes.Singleton().imagen("ProtaDer.png");;
+    public boolean Derecha=true;
+    public Vec posicionP=new Vec();
+    public Vec posicionE=new Vec();
+    public MenuBatalla estado=MenuBatalla.Atacar;
+    public boolean Siguiente=false;
+    public boolean Posicion=true;
+    public boolean destruido=false;
+    public int anchoProta = 100;
+    public int anchoEnemigo = 100;
+    public int xProta = 150;
+    public int ataqueEnemigo=0;
+    public int defensaEnemigo=0;
+    public Variables var=new Variables();
+    public boolean ataque=false;
+    public long inicioPersonaje;
+    public long limitePersonaje=1000;
+    public long inicioEnemigo;
+    public long limiteEnemigo=950;
+    public boolean Habilitado=false;
+    public boolean jefe=false;
+    public boolean isEnemigo=false;
     
     public void inicia(){
         setPosicion(VentanaJuego.Singleton().getWidth()/2, VentanaJuego.Singleton().getHeight()/2);
@@ -84,7 +88,12 @@ public class Batalla {
                 g.fillRect(0, 0,VentanaJuego.Singleton().getWidth() , VentanaJuego.Singleton().getHeight());
                 if(Siguiente){
                     estado=MenuBatalla.Reposo;
-                    Escenario.Singleton().destruyeEnemigo(Escenario.Singleton().enBatalla);
+                    if(Escenario.Singleton().isEnemigo()){
+                    	Escenario.Singleton().destruyeEnemigo(Escenario.Singleton().enBatalla);
+                    }
+                    if(Escenario.Singleton().isJefe()){
+                    	Escenario.Singleton().destruyeJefe();
+                    }
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                 }
                 break;
@@ -96,7 +105,7 @@ public class Batalla {
         	Habilitado=false;
             switch(estado){
                 case Atacar:
-                    anchoEnemigo -= Personaje.Singleton().ataque;
+                    anchoEnemigo -= Personaje.Singleton().ataque-defensaEnemigo;
                     if(anchoEnemigo <= 0){
                         anchoEnemigo=0;
                         estado = MenuBatalla.Ganar;
@@ -107,7 +116,6 @@ public class Batalla {
                     break;
                 case Huir:
                 	anchoProta=100;
-                	anchoEnemigo=100;
                     VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Partida1);
                     break;
                 case Reposo:
@@ -121,8 +129,19 @@ public class Batalla {
         if(Posicion){
             inicia();
             Posicion=false;
-            System.out.println(Escenario.Singleton().batalla().Imagen);
-            anchoEnemigo= Escenario.Singleton().batalla().getVida();
+            System.out.println(Escenario.Singleton().isEnemigo()+"-"+Escenario.Singleton().isJefe());
+            if(Escenario.Singleton().isEnemigo()){
+            	anchoEnemigo=Escenario.Singleton().batalla().getVida();
+            	ataqueEnemigo=Escenario.Singleton().batalla().getAtaque();
+            	defensaEnemigo=Escenario.Singleton().batalla().getDefensa();
+            	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
+            }
+            if(Escenario.Singleton().isJefe()){
+            	anchoEnemigo=Escenario.Singleton().bossBattle().getVida();
+            	ataqueEnemigo=Escenario.Singleton().bossBattle().getAtk();
+            	defensaEnemigo=Escenario.Singleton().bossBattle().getDef();
+            	System.out.println(anchoEnemigo+"-"+ataqueEnemigo+"-"+defensaEnemigo);
+            }
         }
         g.setColor(Color.black);
         g.fillRect(0, 0, VentanaJuego.Singleton().getWidth(), VentanaJuego.Singleton().getHeight());
@@ -135,7 +154,17 @@ public class Batalla {
         //System.out.println(inicioEnemigo+"-"+System.currentTimeMillis()+"-"+(System.currentTimeMillis()-inicioEnemigo)+"-"+limiteEnemigo);
         if(System.currentTimeMillis()-inicioEnemigo > limiteEnemigo && anchoEnemigo>0){
         	//System.out.println("entra");
-        	anchoProta-=(20-Personaje.Singleton().defensa);
+        	if(jefe){
+        		if(Escenario.Singleton().boss.ataque()){
+        			anchoProta-=(ataqueEnemigo-Personaje.Singleton().defensa);
+        		}
+        		
+        	}else{
+        		if(ataqueEnemigo-Personaje.Singleton().defensa>0){
+        			anchoProta-=(ataqueEnemigo-Personaje.Singleton().defensa);
+        		}
+        	}
+        	
         	inicioEnemigo=System.currentTimeMillis();
         	if(anchoProta<=0){
         		estado=MenuBatalla.Perder;
@@ -151,6 +180,14 @@ public class Batalla {
         g.setColor(Color.BLUE);
         g.fillRect(xProta, 285, (int)(System.currentTimeMillis()-inicioPersonaje)/10, 10);
         g.fillRect(posicionE.getIntX(), 285, (int)(System.currentTimeMillis()-inicioEnemigo)/10, 10);
+    }
+    
+    public void isJefe(){
+    	jefe=true;
+    }
+    
+    public void isEnemigo(){
+    	isEnemigo=true;
     }
     
     public void comando(KeyEvent e){

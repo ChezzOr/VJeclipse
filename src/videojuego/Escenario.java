@@ -23,6 +23,7 @@ public class Escenario {
 
     
     public enum Mapa{Mastrum, Bosque, Gremio}
+    private Batalla batalla= new Batalla();
     static Escenario instancia=null;
     public static int alto=VentanaJuego.Singleton().getHeight();
     public static int ancho=VentanaJuego.Singleton().getWidth();
@@ -58,11 +59,12 @@ public class Escenario {
     public static int enBatalla;
     public boolean eliminar;
     private static boolean inicio=true;
-    
+    public static Jefe boss;
     public Rectangle irBosque;
     public Rectangle irBosque2;
     public Rectangle irMastrum;
     public Rectangle irGremio;
+    public static boolean jefe=false,enemigo=false;
     
     public static Escenario Singleton(){
         if(instancia==null){
@@ -132,6 +134,8 @@ public class Escenario {
             item[7] = new Item(600, 400, atributo.poder);
             item[8] = new Item(100, 700, atributo.especial);
             inicio=false;
+            boss= new Jefe();
+            boss.creaJefe(mapaMastrum.getWidth(null) - 290, 320,50,50);
         }
         activo=false;
         switch(actual){
@@ -169,6 +173,11 @@ public class Escenario {
                 	 fueraD=false;
                 	 fueraCamaraX=false;
                 	 fueraCamaraY=false;
+                }
+                boss.dibujaJefe(g, camaraX, camaraY);
+                if(boss.colision()){
+                	colisionJefe(boss);
+                	
                 }
                 break;
             case Bosque:
@@ -261,6 +270,38 @@ public class Escenario {
         
     }
     
+    public boolean isJefe(){
+    	return jefe;
+    }
+    
+    public boolean isEnemigo(){
+    	return enemigo;
+    }
+    
+    public void colisionJefe(Jefe j){
+    	switch(Personaje.Singleton().direccion){
+	        case avanzarIzquierda:
+	            Personaje.Singleton().mueve(2,0);
+	            break;
+	        case avanzarDerecha:
+	            Personaje.Singleton().mueve(-2,0);
+	            break;
+	        case avanzarArriba:
+	            Personaje.Singleton().mueve(0,2);
+	            break;
+	        case avanzarAbajo:
+	            Personaje.Singleton().mueve(0,-2);
+	            break;
+	        default:
+	            break;
+	    }
+    	
+    	jefe=true;
+    	enemigo=false;
+    	batalla.isJefe();
+    	VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Batalla);
+    }
+    
     public void colisionEnemigos(Enemigos N,int a){
     	if(N.colision()){
     		colisionEnemigo=true;
@@ -283,7 +324,10 @@ public class Escenario {
                 default:
                     break;
             }
+            jefe=false;
+            enemigo=true;
             colisionEnemigo=false;
+            batalla.isEnemigo();
             VentanaJuego.Singleton().cambiaPantalla(EstadoPantalla.Pantallas.Batalla);
         }
     }
@@ -302,8 +346,11 @@ public class Escenario {
     }
     
     public Enemigos batalla(){
-    	//System.out.println(enemigos[enBatalla]);
     	return enemigos[enBatalla];
+    }
+    
+    public Jefe bossBattle(){
+    	return boss;
     }
     
     public void destruyeEnemigo(int destruye){
@@ -311,7 +358,13 @@ public class Escenario {
     	System.out.println(destruye);
     	//eliminar=true;
     	enemigos[destruye].setVivo(false);
-    	VentanaJuego.Singleton().nuevaBatalla();
+    	Personaje.Singleton().setExp(enemigos[enBatalla].getExp());
+    	batalla= new Batalla();
+    }
+    
+    public void destruyeJefe(){
+    	boss.setVivo(false);
+    	batalla= new Batalla();
     }
     
     public void comandoTecla(KeyEvent e){
@@ -473,5 +526,16 @@ public class Escenario {
         }
         
     }
+    
+    public void comandoB(KeyEvent e){
+    	batalla.comando(e);
+    }
 
+	public void dibujaBatalla(Graphics g) {
+		batalla.dibujaBatalla(g);
+	}
+
+	public Batalla actualB(){
+		return batalla;
+	}
 }

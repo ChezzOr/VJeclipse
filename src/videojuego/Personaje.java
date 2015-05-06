@@ -39,6 +39,8 @@ public class Personaje {
     boolean evitarSig=false;
     public int ataque=26;
     public int defensa=10;
+    public int exp=0;
+    public int lvl=1;
     
     static Personaje Singleton(){
         if(instancia == null){
@@ -258,4 +260,20 @@ public class Personaje {
     public void iniciarConversacion(){
         
     }
+
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp += exp;
+		if(exp>=100){
+			lvl++;
+			ataque*=2;
+			defensa*=2;
+			exp-=100;
+		}
+	}
+    
+    
 }

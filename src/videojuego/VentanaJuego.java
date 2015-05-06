@@ -38,7 +38,6 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
     private static Datos verDatos = new Datos();
     private static Opciones opciones = new Opciones();
     private static Menu menu = new Menu();
-    private static Batalla batalla= new Batalla();
     private static Inventario inventario = new Inventario();
     
     private static Partida partida1 = new Partida();
@@ -67,9 +66,6 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
         pantalla.cambiar(nuevo);
     }
     
-    public Batalla batallaActual(){
-        return batalla;
-    }
     
     @Override
     public void paint(Graphics g){
@@ -118,7 +114,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                         }
                         break;
                     case Batalla:
-                        batalla.dibujaBatalla(segundo);
+                        Escenario.Singleton().dibujaBatalla(segundo);
                         break;
                     case Perder:
                     	segundo.setColor(Color.black);
@@ -198,7 +194,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                 
                 break;
             case Batalla:
-                batalla.comando(e);
+            	escenario.Singleton().actualB().comando(e);
                 break;
             case Perder:
             	if(e.getKeyCode()==KeyEvent.VK_ENTER){
@@ -368,10 +364,7 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
         
         return nueva;
     }
-    
-    public void nuevaBatalla(){
-    	batalla=new Batalla();
-    }
+
     
     public static Inventario getInventario(){
     	return inventario;

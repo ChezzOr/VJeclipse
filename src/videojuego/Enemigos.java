@@ -18,14 +18,13 @@ public class Enemigos {
     public static Rectangle enemigo=null;
     public static boolean batalla=false;
     private int vida=0;
-    public static int ataque=0;
-    public static int defensa=0;
-    public static Rectangle Imagen=null;
+    private int ataque=0;
+    private int defensa=0;
+    private int exp=0;
+    private Rectangle Imagen=null;
     public int x,y,ancho,alto;
     private boolean vivo;
     public static boolean colision=false;
-    public static String enCombate;
-    public static Batalla batallaP= VentanaJuego.Singleton().batallaActual();
     
     public void  creaEnemigo(int x, int y, int ancho, int alto){
         this.x=x;
@@ -33,9 +32,10 @@ public class Enemigos {
         this.ancho=ancho;
         this.alto=alto;
         Imagen=new Rectangle(x,y,ancho,alto);
-        setVida(100);
-        ataque=10;
-        defensa=5;
+        vida=100;
+        ataque=17;
+        defensa=10;
+        exp=100;
         vivo=true;
         System.out.println(x+"-"+y+"-"+ancho+"-"+alto);
     }
@@ -86,7 +86,39 @@ public class Enemigos {
 	public void setVida(int vida) {
 		this.vida = vida;
 	}
-    
-    
+
+	public int getAtaque() {
+		return ataque;
+	}
+
+	public void setAtaque(int ataque) {
+		this.ataque = ataque;
+	}
+
+	public int getDefensa() {
+		return defensa;
+	}
+
+	public void setDefensa(int defensa) {
+		this.defensa = defensa;
+	}
+
+	public Rectangle getImagen() {
+		return Imagen;
+	}
+
+	public void setImagen(Rectangle imagen) {
+		Imagen = imagen;
+	}
+
+	public int getExp() {
+		return exp;
+	}
+
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	
+	
    
 }

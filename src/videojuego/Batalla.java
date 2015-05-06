@@ -95,8 +95,8 @@ public class Batalla {
         if(Siguiente&&Habilitado){
         	Habilitado=false;
             switch(estado){
-                case Atacar://poner temporizador de ataque
-                    anchoEnemigo -= 26;
+                case Atacar:
+                    anchoEnemigo -= Personaje.Singleton().ataque;
                     if(anchoEnemigo <= 0){
                         anchoEnemigo=0;
                         estado = MenuBatalla.Ganar;

@@ -60,6 +60,8 @@ public class Escenario {
     public boolean eliminar;
     private static boolean inicio=true;
     public static Jefe boss;
+    public static Jefe bossGremio;
+    public static Jefe bossBosque;
     public Rectangle irBosque;
     public Rectangle irBosque2;
     public Rectangle irMastrum;
@@ -75,6 +77,8 @@ public class Escenario {
     }
     
     public void inicia(){
+    	camaraX=-ancho/2;
+        camaraY=-alto/2;
         Personaje.Singleton().setPosicion(VentanaJuego.Singleton().getWidth()/2,
         VentanaJuego.Singleton().getHeight()/2);
         Personaje.Singleton().setEstado(Personaje.Estados.avanzarAbajo);
@@ -123,8 +127,8 @@ public class Escenario {
             enemigos[7].creaEnemigo(720, 380, 100, 100);
             enemigos[8]= new Enemigos();
             enemigos[8].creaEnemigo(540, 450, 100, 100);
-            enemigos[9]= new Enemigos();
-            enemigos[9].creaEnemigo(150, 575, 100, 100);
+            //enemigos[9]= new Enemigos();
+            //enemigos[9].creaEnemigo(150, 575, 100, 100);
             item[0] = new Item(730, 330, atributo.vida);
             item[1] = new Item(470, 580, atributo.poder);
             item[2] = new Item(200, 820, atributo.especial);
@@ -137,6 +141,10 @@ public class Escenario {
             inicio=false;
             boss= new Jefe();
             boss.creaJefe(mapaMastrum.getWidth(null) - 290, 320,50,50);
+            bossGremio= new Jefe();
+            bossGremio.creaJefe(150, 575,50,50);
+            bossBosque= new Jefe();
+            bossBosque.creaJefe(50, 370,50,50);
         }
         jefe=false;
         enemigo=false;
@@ -234,6 +242,11 @@ public class Escenario {
 	               	 fueraCamaraX=false;
 	               	 fueraCamaraY=false;
                 }
+                bossBosque.dibujaJefe(g, camaraX, camaraY);
+                if(bossBosque.colision()){
+                	colisionJefe(bossBosque);
+                	
+                }
                 break;
             case Gremio:
             	g.setColor(Color.BLUE);
@@ -241,7 +254,8 @@ public class Escenario {
                 g.drawImage(mapaGremio, camaraX, camaraY, mapaMastrum.getWidth(null), mapaMastrum.getHeight(null), null);
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
-                for(int i=7;i<10;i++){
+                limites.dibujaLimites(g, camaraX, camaraY);
+                for(int i=7;i<9;i++){
             		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
             		colisionEnemigos(enemigos[i],i);
                 }
@@ -265,6 +279,11 @@ public class Escenario {
 	               	 fueraD=false;
 	               	 fueraCamaraX=false;
 	               	 fueraCamaraY=false;
+                }
+                bossGremio.dibujaJefe(g, camaraX, camaraY);
+                if(bossGremio.colision()){
+                	colisionJefe(bossGremio);
+                	
                 }
                 break;
         }
@@ -550,5 +569,14 @@ public class Escenario {
 
 	public Batalla actualB(){
 		return batalla;
+	}
+	
+	public static void setInstancia(Escenario instancia) {
+		Escenario.instancia = instancia;
+		if(instancia == null){
+			Escenario.instancia = new Escenario();
+			Escenario.instancia.inicia();
+			inicio = true;
+		}
 	}
 }

@@ -51,7 +51,7 @@ public class Enemigos {
     	}
     	modificaEnemigo(CamX,CamY);
         g.setColor(Color.red);
-        g.fillRect(Imagen.x, Imagen.y, Imagen.width,Imagen.height);
+        //g.fillRect(Imagen.x, Imagen.y, Imagen.width,Imagen.height);
     }
     
     public boolean colision(){

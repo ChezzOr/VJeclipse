@@ -123,11 +123,12 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
                     case Perder:
                     	segundo.setColor(Color.black);
                     	segundo.fillRect(0, 0,Singleton().getWidth(), Singleton().getHeight());
-                    	
                     	segundo.setColor(Color.GRAY);
                     	segundo.setFont(fuente_1);
                     	String aux="Tu leyenda ha terminado";
-                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*8 , Singleton().getHeight()/2);
+                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*9 , Singleton().getHeight()/2);
+                    	aux="Presiona Enter";
+                    	segundo.drawString(aux,Singleton().getWidth()/2-aux.length()*9 , Singleton().getHeight()/2+30);
                     	break;
                     default:
                         menu.dibujarMenu(segundo);
@@ -199,6 +200,11 @@ public class VentanaJuego extends JFrame implements KeyListener, MouseListener, 
             case Batalla:
                 batalla.comando(e);
                 break;
+            case Perder:
+            	if(e.getKeyCode()==KeyEvent.VK_ENTER){
+            		pantalla.cambiar(EstadoPantalla.Pantallas.MenuPrincipal);
+            	}
+            	break;
         }
     }
     

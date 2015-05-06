@@ -37,7 +37,7 @@ public class Personaje {
     int alto=VentanaJuego.Singleton().getHeight();
     int ancho=VentanaJuego.Singleton().getWidth();
     boolean evitarSig=false;
-    public int ataque=26;
+    public int ataque=24;
     public int defensa=10;
     public int exp=0;
     public int lvl=1;
@@ -269,8 +269,8 @@ public class Personaje {
 		this.exp += exp;
 		if(exp>=100){
 			lvl++;
-			ataque*=2;
-			defensa*=2;
+			ataque*=1.5;
+			defensa*=1.2;
 			exp-=100;
 		}
 	}

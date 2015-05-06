@@ -39,9 +39,9 @@ public class Batalla {
     public Variables var=new Variables();
     public boolean ataque=false;
     public long inicioPersonaje;
-    public long limitePersonaje=1000;
+    public long limitePersonaje=3000;
     public long inicioEnemigo;
-    public long limiteEnemigo=950;
+    public long limiteEnemigo=2900;
     public boolean Habilitado=false;
     public boolean jefe=false;
     public boolean isEnemigo=false;
@@ -191,8 +191,8 @@ public class Batalla {
         g.fillRect(xProta, 275, anchoProta, 10);
         g.fillRect(posicionE.getIntX(), 275,anchoEnemigo, 10);
         g.setColor(Color.BLUE);
-        g.fillRect(xProta, 285, (int)(System.currentTimeMillis()-inicioPersonaje)/10, 10);
-        g.fillRect(posicionE.getIntX(), 285, (int)(System.currentTimeMillis()-inicioEnemigo)/10, 10);
+        g.fillRect(xProta, 285, (int)(System.currentTimeMillis()-inicioPersonaje)/30, 10);
+        g.fillRect(posicionE.getIntX(), 285, (int)(System.currentTimeMillis()-inicioEnemigo)/29, 10);
     }
     
     public void isJefe(){

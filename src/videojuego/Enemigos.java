@@ -34,7 +34,7 @@ public class Enemigos {
         vida=100;
         ataque=17;
         defensa=10;
-        exp=100;
+        exp=60;
         vivo=true;
         System.out.println(x+"-"+y+"-"+ancho+"-"+alto);
     }

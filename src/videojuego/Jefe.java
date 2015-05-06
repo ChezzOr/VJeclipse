@@ -25,9 +25,9 @@ public class Jefe {
 	        this.ancho=ancho;
 	        this.alto=alto;
 	        Imagen=new Rectangle(x,y,ancho,alto);
-	        vida=150;
-	        ataque=40;
-	        defensa=23;
+	        vida=140;
+	        ataque=35;
+	        defensa=20;
 	        stamina=100;
 	        regen=15;
 	        costo=25;

@@ -41,23 +41,32 @@ public class Item {
     public void dibujarItem(Graphics g, int CamX, int CamY){
         int x = pos.getIntX();
         int y = pos.getIntY();
-        switch(tipo){
-	        case vida:
-	        	g.setColor(Color.ORANGE);
-	    		break;
-	    	case poder:
-	    		g.setColor(Color.BLUE);
-	        	break;
-        	case especial:
-        		g.setColor(Color.YELLOW);
-            	break;
+        if(!recogido){
+        	switch(tipo){
+		        case vida:
+		        	g.setColor(Color.ORANGE);
+		    		break;
+		    	case poder:
+		    		g.setColor(Color.BLUE);
+		        	break;
+	        	case especial:
+	        		g.setColor(Color.YELLOW);
+	            	break;
+	        }
+	    	modificaItem(CamX, CamY);
+	        g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
+	    	//g.drawImage(imagen, x, y, null);
         }
-    	modificaItem(CamX, CamY);
-        g.fillRect(Imagen.x, Imagen.y, Imagen.width, Imagen.height);
-    	//g.drawImage(imagen, x, y, null);
     }
     
-    /*public Rectangle getBounds(){
-        return new Rectangle(pos.getIntX(), pos.getIntY(), imagen.getWidth(null), imagen.getHeight(null));
-    }*/
+    public boolean colision(){
+        if(Imagen.intersects(Personaje.Singleton().fronteras())){
+            return true;
+        }
+        return false;
+    }
+    
+    public void borraItem(){
+    	recogido = true;
+    }
 }

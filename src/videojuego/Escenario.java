@@ -133,7 +133,6 @@ public class Escenario {
             item[8] = new Item(100, 700, atributo.especial);
             inicio=false;
         }
-        System.out.println(camaraX+"-"+camaraY);
         activo=false;
         switch(actual){
             case Mastrum:

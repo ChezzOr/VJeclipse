@@ -181,7 +181,7 @@ public class Bounds {
         		actuales = limitesMapas.Gremio;
         		cambioEstado = true;
         	} else {
-        		actuales = limitesMapas.Mastrum;
+        		actuales = limitesMapas.Bosque;
         		cambioEstado = true;
         	}
         }

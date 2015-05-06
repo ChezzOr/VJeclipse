@@ -36,12 +36,16 @@ public class Batalla {
     int xProta = 150;
     Variables var=new Variables();
     boolean ataque=false;
-    long inicio;
-    long limite=10000;
+    long inicioPersonaje;
+    long limitePersonaje=1000;
+    long inicioEnemigo;
+    long limiteEnemigo=950;
+    boolean Habilitado=false;
     
     public void inicia(){
         setPosicion(VentanaJuego.Singleton().getWidth()/2, VentanaJuego.Singleton().getHeight()/2);
-        inicio=System.currentTimeMillis();
+        inicioPersonaje=System.currentTimeMillis();
+        inicioEnemigo=inicioPersonaje;
     }
     
     void setPosicion(int x, int y){
@@ -55,7 +59,7 @@ public class Batalla {
     
     public void menuBatalla(Graphics g){
         g.setColor(Color.yellow);
-        g.fillRoundRect(20, 480, 750, 120, 20, 20);
+        g.fillRoundRect(20, 450, 750, 120, 20, 20);
         g.setColor(Color.GRAY);
         g.setFont(fuente_1);
         g.drawString("Objeto", 300, VentanaJuego.Singleton().getHeight()-80);
@@ -87,14 +91,15 @@ public class Batalla {
             case Perder:
                 break;
         }
-        if(Siguiente){
+        if(Siguiente&&Habilitado){
+        	Habilitado=false;
             switch(estado){
                 case Atacar://poner temporizador de ataque
                     anchoEnemigo -= 26;
                     if(anchoEnemigo <= 0){
                         anchoEnemigo=0;
-                        
                         estado = MenuBatalla.Ganar;
+                        Habilitado=true;
                     }
                     break;
                 case Item:
@@ -118,54 +123,67 @@ public class Batalla {
         }
         g.setColor(Color.black);
         g.fillRect(0, 0, VentanaJuego.Singleton().getWidth(), VentanaJuego.Singleton().getHeight());
-        System.out.println(inicio+"-"+System.currentTimeMillis());
-        if(System.currentTimeMillis()-inicio>limite){
+        //System.out.println(inicio+"-"+System.currentTimeMillis()+"-"+(System.currentTimeMillis()-inicio));
+        if(Habilitado || System.currentTimeMillis()-inicioPersonaje>limitePersonaje){
+        	Habilitado=true;
         	menuBatalla(g);
+        	inicioPersonaje=System.currentTimeMillis();
+        }
+        //System.out.println(inicioEnemigo+"-"+System.currentTimeMillis()+"-"+(System.currentTimeMillis()-inicioEnemigo)+"-"+limiteEnemigo);
+        if(System.currentTimeMillis()-inicioEnemigo > limiteEnemigo && anchoEnemigo>0){
+        	//System.out.println("entra");
+        	anchoProta-=(20-Personaje.Singleton().defensa);
+        	inicioEnemigo=System.currentTimeMillis();
         }
         g.drawImage(combate, posicionP.getIntX(), posicionP.getIntY(), null);
+        g.setColor(Color.cyan);
         g.fillRect(posicionE.getIntX(), posicionE.getIntY(), 100, 100);
         g.setColor(Color.red);
         g.fillRect(xProta, 275, anchoProta, 10);
         g.fillRect(posicionE.getIntX(), 275,anchoEnemigo, 10);
-        
+        g.setColor(Color.BLUE);
+        g.fillRect(xProta, 285, (int)(System.currentTimeMillis()-inicioPersonaje)/10, 10);
+        g.fillRect(posicionE.getIntX(), 285, (int)(System.currentTimeMillis()-inicioEnemigo)/10, 10);
     }
     
     public void comando(KeyEvent e){
-        if(e.getKeyCode()==KeyEvent.VK_RIGHT){
-            switch (estado){
-                case Atacar:
-                    estado=MenuBatalla.Item;
-                    break;
-                case Item: 
-                    estado=MenuBatalla.Huir;
-                    break;
-                case Huir: 
-                    estado=MenuBatalla.Atacar;
-                    break;
-                case Reposo:
-                    estado=MenuBatalla.Atacar;
-                    break;
-            }
-        }
-        if(e.getKeyCode()==KeyEvent.VK_LEFT){
-            switch (estado){
-                case Reposo:
-                    estado=MenuBatalla.Huir;
-                    break;
-                case Atacar: 
-                    estado=MenuBatalla.Huir;
-                    break;
-                case Item: 
-                    estado=MenuBatalla.Atacar;
-                    break;
-                case Huir:
-                    estado=MenuBatalla.Item;
-                    break;
-            }
-        }
-        if(e.getKeyCode()==KeyEvent.VK_ENTER){
-            Siguiente=true;
-        }
+    	if(Habilitado){
+		    if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+		        switch (estado){
+		            case Atacar:
+		                estado=MenuBatalla.Item;
+		                break;
+		            case Item: 
+		                estado=MenuBatalla.Huir;
+		                break;
+		            case Huir: 
+		                estado=MenuBatalla.Atacar;
+		                break;
+		            case Reposo:
+		                estado=MenuBatalla.Atacar;
+		                break;
+		        }
+		    }
+		    if(e.getKeyCode()==KeyEvent.VK_LEFT){
+		        switch (estado){
+		            case Reposo:
+		                estado=MenuBatalla.Huir;
+		                break;
+		            case Atacar: 
+		                estado=MenuBatalla.Huir;
+		                break;
+		            case Item: 
+		                estado=MenuBatalla.Atacar;
+		                break;
+		            case Huir:
+		                estado=MenuBatalla.Item;
+		                break;
+		        }
+		    }
+		    if(e.getKeyCode()==KeyEvent.VK_ENTER){
+		        Siguiente=true;
+		    }
+    	}
     }
     
 }

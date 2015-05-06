@@ -54,7 +54,7 @@ public class Escenario {
     public static Vec pasada=new Vec();
     public static int posicionEnemigo=0;
     public static Enemigos enemigos[]= new Enemigos[10];
-    public static Item[] item = new Item[3];
+    public static Item[] item = new Item[16];
     public static int enBatalla;
     public boolean eliminar;
     private static boolean inicio=true;
@@ -105,9 +105,27 @@ public class Escenario {
                 a+=100;
                 b+=250;
             }
+            enemigos[4]= new Enemigos();
+            enemigos[4].creaEnemigo(300, 200, 100, 100);
+            enemigos[5]= new Enemigos();
+            enemigos[5].creaEnemigo(400, 450, 100, 100);
+            enemigos[6]= new Enemigos();
+            enemigos[6].creaEnemigo(500, 700, 100, 100);
+            enemigos[7]= new Enemigos();
+            enemigos[7].creaEnemigo(300, 200, 100, 100);
+            enemigos[8]= new Enemigos();
+            enemigos[8].creaEnemigo(400, 450, 100, 100);
+            enemigos[9]= new Enemigos();
+            enemigos[9].creaEnemigo(500, 700, 100, 100);
             item[0] = new Item(500, 200, atributo.vida);
             item[1] = new Item(600, 400, atributo.poder);
             item[2] = new Item(100, 700, atributo.especial);
+            item[3] = new Item(500, 200, atributo.vida);
+            item[4] = new Item(600, 400, atributo.poder);
+            item[5] = new Item(100, 700, atributo.especial);
+            item[6] = new Item(500, 200, atributo.vida);
+            item[7] = new Item(600, 400, atributo.poder);
+            item[8] = new Item(100, 700, atributo.especial);
             inicio=false;
         }
         activo=false;
@@ -126,7 +144,8 @@ public class Escenario {
                 	}*/
             		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
             		colisionEnemigos(enemigos[i],i);
-                }for(int i=0;i<3;i++){
+                }
+        		for(int i=0;i<3;i++){
                 	item[i].dibujarItem(g, camaraX, camaraY);
                 	colisionItems(item[i], i);
                 }
@@ -148,6 +167,16 @@ public class Escenario {
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
                 g.fillRect(0 + camaraX, 375 + camaraY, 10, 100);
+                for(int i=4;i<7;i++){
+                	/*if(i==enBatalla && eliminar){
+                		enemigos[i].setVivo(false);
+                	}*/
+            		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
+            		colisionEnemigos(enemigos[i],i);
+                }for(int i=3;i<6;i++){
+                	item[i].dibujarItem(g, camaraX, camaraY);
+                	colisionItems(item[i], i);
+                }
                 Rectangle irGremio = new Rectangle(0 + camaraX, 375 + camaraY, 10, 100);
                 if(Personaje.Singleton().colisiona(irGremio)){
                 	limites.cambiaLimite(0);
@@ -174,6 +203,16 @@ public class Escenario {
                 //System.out.println(Personaje.Singleton().getX() + "----------------" + Personaje.Singleton().getY());
                 Personaje.Singleton().dibujarPersonaje(g);
                 Personaje.Singleton().movimiento(dirCol,false);
+                for(int i=6;i<10;i++){
+                	/*if(i==enBatalla && eliminar){
+                		enemigos[i].setVivo(false);
+                	}*/
+            		enemigos[i].dibujaEnemigo(g, camaraX, camaraY);
+            		colisionEnemigos(enemigos[i],i);
+                }for(int i=6;i<9;i++){
+                	item[i].dibujarItem(g, camaraX, camaraY);
+                	colisionItems(item[i], i);
+                }
                 g.setColor(Color.BLACK);
                 g.fillRect(1665 + camaraX, 580 + camaraY, 10, 100);
                 Rectangle irBosque2 = new Rectangle(1665 + camaraX, 580 + camaraY, 10, 100);

@@ -37,6 +37,8 @@ public class Personaje {
     int alto=VentanaJuego.Singleton().getHeight();
     int ancho=VentanaJuego.Singleton().getWidth();
     boolean evitarSig=false;
+    public int ataque=26;
+    public int defensa=10;
     
     static Personaje Singleton(){
         if(instancia == null){

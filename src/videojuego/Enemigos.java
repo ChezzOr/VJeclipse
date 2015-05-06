@@ -7,6 +7,7 @@ package videojuego;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.*;
 
@@ -21,6 +22,7 @@ public class Enemigos {
     private int ataque=0;
     private int defensa=0;
     private int exp=0;
+    private Image sprite;
     private Rectangle Imagen=null;
     public int x,y,ancho,alto;
     private boolean vivo;
@@ -114,6 +116,14 @@ public class Enemigos {
 
 	public void setExp(int exp) {
 		this.exp = exp;
+	}
+
+	public Image getSprite() {
+		return sprite;
+	}
+
+	public void setSprite(Image sprite) {
+		this.sprite = sprite;
 	}
 	
 	

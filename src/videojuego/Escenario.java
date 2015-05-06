@@ -106,6 +106,7 @@ public class Escenario {
         if(inicio){
         	enemigos[0]= new Enemigos();
             enemigos[0].creaEnemigo(1075,60, 200, 110);
+            enemigos[0].setSprite(DiccionarioImagenes.Singleton().imagen("elizabeth_mini.png"));
             enemigos[1]= new Enemigos();
             enemigos[1].creaEnemigo(440, 765, 165, 110);
             enemigos[2]= new Enemigos();
